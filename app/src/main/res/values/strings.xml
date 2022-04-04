@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WasdAndroid</string>
+    <string name="textViewDescription">Вставьте ссылку на реплей. Обязательное условие, что в ссылке должен присутствовать номер реплея. Например,\n https://wasd.tv/serega_pirat/videos?record=939531</string>
+    <string name="urlEditText">URL</string>
+    <string name="textViewUrl">Ссылка на реплей</string>
+    <string name="buttonStartChat">Включить чат</string>
+    <string name="buttonPause">Стоп</string>
+</resources>
