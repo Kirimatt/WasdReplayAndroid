@@ -1,66 +1,82 @@
 package com.kirimatt.wasdAndroid.activities;
 
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.MediaController;
+import android.widget.VideoView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.kirimatt.wasdAndroid.R;
 import com.kirimatt.wasdAndroid.adapters.ListViewAdapter;
-import com.kirimatt.wasdAndroid.dtos.ChatMessages.Info;
 import com.kirimatt.wasdAndroid.dtos.ChatMessages.Message;
-import com.kirimatt.wasdAndroid.utils.ListOfMessages;
+import com.kirimatt.wasdAndroid.utils.MainActivityDataShare;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ChatActivity extends AppCompatActivity {
 
     private List<Message> messages;
-
+    private VideoView videoPlayer;
+    private long startReplayInMillis;
+    private List<Message> listToViewMessages;
+    private ListView listView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_chat);
 
-        ListView listView = findViewById(R.id.listView);
+        videoPlayer = findViewById(R.id.videoView);
+        videoPlayer.setVideoURI(Uri.parse(MainActivityDataShare.getUriString()));
 
-        messages = ListOfMessages.getMessages();
+        videoPlayer.setMediaController(new MediaController(this));
 
-        runOnUiThread(() -> Toast.makeText(
-                getApplicationContext(),
-                String.valueOf(messages.size()),
-                Toast.LENGTH_LONG
-        ).show());
+        videoPlayer.start();
 
-        generateListView(messages, this, listView);
+        listView = findViewById(R.id.listView);
 
-        Message message = messages.get(0);
-        Info info = message.getInfo();
-        info.setMessage("ПАМ ПАРААААМ МОДЕРЫ ХУЕСОСЫ");
-        info.setUserLogin("kirimatt");
+        messages = MainActivityDataShare.getMessages();
+        startReplayInMillis = MainActivityDataShare.getStartReplay().getTime();
 
-        message.setInfo(info);
+        listToViewMessages = new ArrayList<>(messages.size());
 
-        messages.set(0, message);
-        messages.add(1, message);
+        generateListView();
     }
 
-    public static void generateListView(List<Message> messages, AppCompatActivity appCompatActivity,
-                                        ListView listView) {
+    public void generateListView() {
 
         ListAdapter adapter = new ListViewAdapter(
-                appCompatActivity.getApplicationContext(),
+                getApplicationContext(),
                 R.layout.row,
                 R.id.textViewName,
-                messages
+                listToViewMessages
         );
 
         listView.setAdapter(adapter);
+
+        new Thread(() -> {
+            int currentMessagePosition = messages.size() - 1;
+            while (currentMessagePosition >= 0) {
+                if (messages.get(currentMessagePosition).getDateTime().getTime() - startReplayInMillis <=
+                        videoPlayer.getCurrentPosition()) {
+                    int finalCurrentMessagePosition = currentMessagePosition;
+                    runOnUiThread(() -> {
+                        listToViewMessages.add(messages.get(finalCurrentMessagePosition));
+                        listView.setAdapter(adapter);
+                    });
+                    currentMessagePosition--;
+                }
+            }
+
+        }).start();
     }
+
+
 }

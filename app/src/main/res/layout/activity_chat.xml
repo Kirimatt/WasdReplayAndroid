@@ -9,7 +9,7 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="811dp"
+        android:layout_height="349dp"
         android:layout_above="@+id/buttonRefresh"
         android:layout_marginBottom="15dp" />
 
@@ -29,14 +29,22 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="47dp"
-        android:layout_marginEnd="46dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="1dp"
         android:maxLines="1"
         android:text="@string/buttonPause"
         app:autoSizeMaxTextSize="100sp"
         app:autoSizeMinTextSize="5sp"
         app:autoSizeTextType="uniform" />
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="222dp"
+        android:layout_above="@+id/listView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="1dp" />
 
 
 </RelativeLayout>

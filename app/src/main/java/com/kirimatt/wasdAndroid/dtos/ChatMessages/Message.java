@@ -9,13 +9,13 @@ import java.util.Date;
 
 public class Message implements Serializable {
     @SerializedName("id")
-    public String id;
+    private String id;
     @SerializedName("type")
-    public String type;
+    private String type;
     @SerializedName("info")
-    public Info info;
+    private Info info;
     @SerializedName("date_time")
-    public Date dateTime;
+    private Date dateTime;
 
     public String getId() {
         return id;

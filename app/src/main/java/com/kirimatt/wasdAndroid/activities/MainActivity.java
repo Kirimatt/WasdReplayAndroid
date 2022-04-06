@@ -12,22 +12,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.kirimatt.wasdAndroid.R;
 import com.kirimatt.wasdAndroid.dtos.ChatMessages.ChatMessagesRequestDto;
-import com.kirimatt.wasdAndroid.dtos.ChatMessages.ChatMessagesResponseDto;
 import com.kirimatt.wasdAndroid.dtos.ChatMessages.Message;
 import com.kirimatt.wasdAndroid.dtos.chatInfo.ChatInfoResponseDto;
 import com.kirimatt.wasdAndroid.services.ChatInfoService;
 import com.kirimatt.wasdAndroid.services.ChatMessagesService;
-import com.kirimatt.wasdAndroid.utils.ListOfMessages;
+import com.kirimatt.wasdAndroid.utils.MainActivityDataShare;
 import com.kirimatt.wasdAndroid.utils.UrlConverterToRequestChatInfo;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String EXTRA_MESSAGES = "kirimatt.currencyTransfer.EXTRA_MESSAGES";
-    private Button buttonStartChat;
     private EditText editTextUrl;
     private ProgressBar progressBar;
 
@@ -37,13 +32,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         editTextUrl = findViewById(R.id.editTextUrl);
-        buttonStartChat = findViewById(R.id.buttonStartChat);
+        Button buttonStartChat = findViewById(R.id.buttonStartChat);
         progressBar = findViewById(R.id.progressBar);
 
         buttonStartChat.setOnClickListener(view -> {
             if (editTextUrl.getText().length() > 0)
                 startChat();
         });
+
+        String resource = "https://wasd.tv/serega_pirat/videos?record=936665";
+
+        editTextUrl.setText(resource);
     }
 
     public void startChat() {
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             //Получение chatId из URL трансляции
             ChatInfoResponseDto responseDto = ChatInfoService.getChatInfo(
                     UrlConverterToRequestChatInfo.convert(
-                            "https://wasd.tv/serega_pirat/videos?record=936665"
+                            editTextUrl.getText().toString()
                     )
             );
 
@@ -92,7 +91,15 @@ public class MainActivity extends AppCompatActivity {
             runOnUiThread(() -> {
                 //Статический класс для содержания и передачи сообщений
                 //TODO: shared preferences?? Put extra не работает, слишком много памяти
-                ListOfMessages.setMessages(messages);
+                MainActivityDataShare.setMessages(messages);
+                MainActivityDataShare.setStartReplay(responseDto.getResult().getPublishedAt());
+                MainActivityDataShare.setUriString(
+                        responseDto.getResult()
+                        .getMediaContainerStreams().get(0)
+                        .getStreamMedia().get(0)
+                        .getMediaMeta()
+                        .getMediaArchiveUrl()
+                );
                 Intent intent = new Intent(this, ChatActivity.class);
                 startActivity(intent);
             });

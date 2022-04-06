@@ -9,8 +9,6 @@ Happ/src/main/java/com/kirimatt/wasdandroid/services/ChatInfoService.java,7\f\7
 Sapp/src/main/java/com/kirimatt/wasdandroid/utils/UrlConverterToRequestChatInfo.java,4\1\4174662d2dc4d638120ec0a185328a047bae6d0b
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
-@
-app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 r
 Bapp/src/main/java/com/kirimatt/wasdandroid/dtos/chatInfo/Game.java,a\e\ae41d4cce7ea74905ed20c454161a3dfd9a9b276
 ƒ
@@ -33,3 +31,21 @@ y
 Iapp/src/main/java/com/kirimatt/wasdAndroid/dtos/chatInfo/StreamMedia.java,f\e\fedc17d86b156cb401ac47cc0996ae7cba916d80
 t
 Dapp/src/main/java/com/kirimatt/wasdAndroid/dtos/chatInfo/Result.java,2\5\253f917f1c697382403fa6644dc7782d6f7c440a
+q
+Aapp/src/main/java/com/kirimatt/wasdAndroid/dtos/chatInfo/Tag.java,7\2\7211fc6c07c183f36e814c3e8c543660bad00143
+w
+Gapp/src/main/java/com/kirimatt/wasdAndroid/dtos/chatInfo/MediaMeta.java,f\1\f1fb0026f591057cd5e482cb264b5a40b77e96e7
+ƒ
+Sapp/src/main/java/com/kirimatt/wasdAndroid/dtos/chatInfo/MediaContainerChannel.java,c\e\cedf1e6a331c732e1506936d26cc2e814e259395
+‚
+Rapp/src/main/java/com/kirimatt/wasdAndroid/dtos/chatInfo/MediaContainerStream.java,6\6\66f236c78a2824ed162e4983e818b101109ba4bd
+q
+Aapp/src/main/java/com/kirimatt/wasdAndroid/dtos/common/Image.java,0\c\0caba3738c6c3f64d81373945c1d71ba4c18f546
+y
+Iapp/src/main/java/com/kirimatt/wasdAndroid/dtos/ChatMessages/Sticker.java,c\e\ce93cdd530f25aed5bf3570fe633529a461300b8
+
+Oapp/src/main/java/com/kirimatt/wasdAndroid/repositories/ChatInfoRepository.java,c\2\c221516f07fab8f648085bad80e747c7de110f58
+ƒ
+Sapp/src/main/java/com/kirimatt/wasdAndroid/repositories/ChatMessagesRepository.java,2\b\2b9be1eb321f57d4b5fc8ae17ff3d0c8ed062f41
+|
+Lapp/src/main/java/com/kirimatt/wasdAndroid/services/ChatMessagesService.java,f\6\f655f07265e2f15b8f46749f3054fb4bea8848be
