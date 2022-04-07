@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 startChat();
         });
 
+        //TODO: на время тестов
         String resource = "https://wasd.tv/serega_pirat/videos?record=936665";
 
         editTextUrl.setText(resource);

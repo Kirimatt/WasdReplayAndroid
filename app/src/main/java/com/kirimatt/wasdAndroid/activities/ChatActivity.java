@@ -1,8 +1,8 @@
 package com.kirimatt.wasdAndroid.activities;
 
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.MediaController;
@@ -18,7 +18,7 @@ import com.kirimatt.wasdAndroid.utils.MainActivityDataShare;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Objects;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -27,11 +27,15 @@ public class ChatActivity extends AppCompatActivity {
     private long startReplayInMillis;
     private List<Message> listToViewMessages;
     private ListView listView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_chat);
+
+        // Убрать ActionBar
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         videoPlayer = findViewById(R.id.videoView);
         videoPlayer.setVideoURI(Uri.parse(MainActivityDataShare.getUriString()));
@@ -64,19 +68,25 @@ public class ChatActivity extends AppCompatActivity {
         new Thread(() -> {
             int currentMessagePosition = messages.size() - 1;
             while (currentMessagePosition >= 0) {
-                if (messages.get(currentMessagePosition).getDateTime().getTime() - startReplayInMillis <=
-                        videoPlayer.getCurrentPosition()) {
-                    int finalCurrentMessagePosition = currentMessagePosition;
-                    runOnUiThread(() -> {
-                        listToViewMessages.add(messages.get(finalCurrentMessagePosition));
-                        listView.setAdapter(adapter);
-                    });
-                    currentMessagePosition--;
+                try {
+                    if (messages.get(currentMessagePosition).getDateTime().getTime() - startReplayInMillis <=
+                            videoPlayer.getCurrentPosition()) {
+                        int finalCurrentMessagePosition = currentMessagePosition;
+                        runOnUiThread(() -> {
+                            listToViewMessages.add(messages.get(finalCurrentMessagePosition));
+                            listView.setAdapter(adapter);
+                            listView.setSelection(adapter.getCount() - 1);
+                        });
+                        currentMessagePosition--;
+                    }
+                } catch (IllegalStateException exception) {
+                    Log.d("ChatThread", "An error occurred while auto-scrolling chat. " +
+                            "Maybe it catches by pressing the previous activity button " +
+                            "while the thread wants to add new messages.");
+                    break;
                 }
             }
 
         }).start();
     }
-
-
 }

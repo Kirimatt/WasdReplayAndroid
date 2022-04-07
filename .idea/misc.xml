@@ -3,9 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable/icon.xml" value="0.193" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_chat.xml" value="0.33" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/row.xml" value="0.1716485507246377" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/row.xml" value="0.5" />
       </map>
     </option>
   </component>

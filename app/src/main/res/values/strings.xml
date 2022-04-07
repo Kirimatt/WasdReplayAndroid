@@ -5,4 +5,7 @@
     <string name="textViewUrl">Ссылка на реплей</string>
     <string name="buttonStartChat">Включить чат</string>
     <string name="buttonPause">Стоп</string>
+    <string name="contentDescriptionSticker">Sticker</string>
+    <string name="contentDescriptionAvatar">Avatar</string>
+    <string name="contentDescriptionModerator">contentDescriptionModerator</string>
 </resources>
