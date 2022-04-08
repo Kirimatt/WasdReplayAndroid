@@ -4,9 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable/icon.xml" value="0.193" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout-land/activity_chat.xml" value="0.35625" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout-land/activity_chat_portrait.xml" value="0.35625" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_chat.xml" value="0.33" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_chat_landscape.xml" value="0.3453125" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_chat_landscape_no_chat.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_chat_landscape_only_video.xml" value="0.30978260869565216" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_chat_portrait.xml" value="0.30978260869565216" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/row.xml" value="0.5" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2525" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2525" />
       </map>
     </option>
   </component>

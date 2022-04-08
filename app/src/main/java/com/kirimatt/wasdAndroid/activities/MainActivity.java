@@ -91,9 +91,9 @@ public class MainActivity extends AppCompatActivity {
             //Запуск новой активности
             runOnUiThread(() -> {
                 //Статический класс для содержания и передачи сообщений
-                //TODO: shared preferences?? Put extra не работает, слишком много памяти
                 MainActivityDataShare.setMessages(messages);
                 MainActivityDataShare.setStartReplay(responseDto.getResult().getPublishedAt());
+                MainActivityDataShare.setTimeToSeek(0);
                 MainActivityDataShare.setUriString(
                         responseDto.getResult()
                         .getMediaContainerStreams().get(0)

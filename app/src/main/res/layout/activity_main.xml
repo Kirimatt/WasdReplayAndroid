@@ -10,12 +10,15 @@
 
     <TextView
         android:id="@+id/textViewDescription"
-        android:layout_width="363dp"
-        android:layout_height="71dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/editTextUrl"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:text="@string/textViewDescription" />
+        android:text="@string/textViewDescription"
+        android:textSize="15sp"
+        android:textStyle="normal"
+        android:typeface="sans"
+        android:padding="15dp"/>
 
 
     <EditText

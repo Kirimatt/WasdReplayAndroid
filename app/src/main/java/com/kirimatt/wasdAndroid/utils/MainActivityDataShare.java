@@ -9,9 +9,18 @@ public class MainActivityDataShare {
     private static List<Message> messages;
     private static String uriString;
     private static Date startReplay;
+    private static int timeToSeek;
 
     private MainActivityDataShare() {
 
+    }
+
+    public static int getTimeToSeek() {
+        return timeToSeek;
+    }
+
+    public static void setTimeToSeek(int timeToSeek) {
+        MainActivityDataShare.timeToSeek = timeToSeek;
     }
 
     public static List<Message> getMessages() {

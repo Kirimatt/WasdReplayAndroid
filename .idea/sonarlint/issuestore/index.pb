@@ -49,9 +49,13 @@ Sapp/src/main/java/com/kirimatt/wasdAndroid/repositories/ChatMessagesRepository.
 Lapp/src/main/java/com/kirimatt/wasdAndroid/services/ChatMessagesService.java,f\6\f655f07265e2f15b8f46749f3054fb4bea8848be
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
-ƒ
-Sapp/src/main/java/com/kirimatt/wasdAndroid/utils/UrlConverterToRequestChatInfo.java,d\6\d625fcdd200658bac8de906b3b3b27f8db03cb09
 x
 Happ/src/main/java/com/kirimatt/wasdAndroid/services/ChatInfoService.java,2\2\2202c80cd51d65342e0afe1fffbd2591eea93085
 y
 Iapp/src/main/java/com/kirimatt/wasdAndroid/dtos/ChatMessages/Message.java,4\d\4dd39641f9c5cb9aa3d1e3b968b56f8e2e52341d
+v
+Fapp/src/main/java/com/kirimatt/wasdAndroid/dtos/ChatMessages/Info.java,c\a\ca854a183f3fdc87234bb814a3d4fd5bce96bdcf
+q
+Aapp/src/main/java/com/kirimatt/wasdAndroid/dtos/common/Image.java,0\c\0caba3738c6c3f64d81373945c1d71ba4c18f546
+x
+Happ/src/main/java/com/kirimatt/wasdAndroid/adapters/ListViewAdapter.java,6\7\677a966678f4da6e5f9eb94ed499decb38d4ede5
