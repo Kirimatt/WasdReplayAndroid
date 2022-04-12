@@ -3,13 +3,13 @@ package com.kirimatt.wasdAndroid.dtos.chatInfo;
 import java.io.Serializable;
 
 public class ChatInfoResponseDto implements Serializable {
-    private Result result;
+    private ResultPreviews resultPreviews;
 
-    public Result getResult() {
-        return result;
+    public ResultPreviews getResult() {
+        return resultPreviews;
     }
 
-    public void setResult(Result result) {
-        this.result = result;
+    public void setResult(ResultPreviews resultPreviews) {
+        this.resultPreviews = resultPreviews;
     }
 }

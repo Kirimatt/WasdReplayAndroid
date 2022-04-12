@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class    Tag implements Serializable {
+public class Tag implements Serializable {
     @SerializedName("tag_id")
     private int tagId;
     @SerializedName("tag_name")
@@ -12,7 +12,7 @@ public class    Tag implements Serializable {
     @SerializedName("tag_description")
     private String tagDescription;
     @SerializedName("tag_meta")
-    private Object tagMeta;
+    private String tagMeta;
     @SerializedName("tag_type")
     private String tagType;
     @SerializedName("tag_media_containers_online_count")
@@ -42,11 +42,11 @@ public class    Tag implements Serializable {
         this.tagDescription = tagDescription;
     }
 
-    public Object getTagMeta() {
+    public String getTagMeta() {
         return tagMeta;
     }
 
-    public void setTagMeta(Object tagMeta) {
+    public void setTagMeta(String tagMeta) {
         this.tagMeta = tagMeta;
     }
 

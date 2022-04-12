@@ -10,9 +10,18 @@ public class MainActivityDataShare {
     private static String uriString;
     private static Date startReplay;
     private static int timeToSeek;
+    private static boolean chatActivated;
 
     private MainActivityDataShare() {
 
+    }
+
+    public static boolean isChatActivated() {
+        return chatActivated;
+    }
+
+    public static void setChatActivated(boolean chatActivated) {
+        MainActivityDataShare.chatActivated = chatActivated;
     }
 
     public static int getTimeToSeek() {

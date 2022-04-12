@@ -25,12 +25,15 @@ public class ImageManager {
     private static final String TAG = "ImageManager";
     private static final Map<String, Bitmap> IMAGE_MAP = new HashMap<>();
 
-    /** Private constructor prevents instantiation from other classes */
-    private ImageManager () {}
+    /**
+     * Private constructor prevents instantiation from other classes
+     */
+    private ImageManager() {
+    }
 
     public static void fetchImage(final String iUrl, final ImageView iView, Context context) {
         //TODO: сделать отдельным методом от репликации кода
-        if ( iUrl == null || iView == null )
+        if (iUrl == null || iView == null)
             return;
 
         if (IMAGE_MAP.containsKey(iUrl)) {
@@ -47,7 +50,7 @@ public class ImageManager {
         backgroundExecutor.execute(() -> {
             final Bitmap image = downloadImage(iUrl);
             IMAGE_MAP.put(iUrl, image);
-            if ( image != null ) {
+            if (image != null) {
                 mainExecutor.execute(() -> iView.setImageBitmap(image));
             }
         });
@@ -56,7 +59,7 @@ public class ImageManager {
 
     public static void fetchImageWithScale(final String iUrl, final ImageView iView, Context context,
                                            int width, int height, boolean isPixelated) {
-        if ( iUrl == null || iView == null )
+        if (iUrl == null || iView == null)
             return;
 
         if (IMAGE_MAP.containsKey(iUrl)) {
@@ -80,7 +83,7 @@ public class ImageManager {
 
             IMAGE_MAP.put(iUrl, image);
 
-            if ( image != null ) {
+            if (image != null) {
                 mainExecutor.execute(() -> iView.setImageBitmap(image));
             }
 
@@ -92,6 +95,7 @@ public class ImageManager {
         Bitmap bitmap = null;
         HttpURLConnection conn = null;
         BufferedInputStream bufferedInputStream = null;
+        //TODO: Change to try-with-resources
         try {
             conn = (HttpURLConnection) new URL(iUrl).openConnection();
             conn.setDoInput(true);
@@ -111,9 +115,12 @@ public class ImageManager {
             Log.w(TAG, "Out of memory!!!");
             return null;
         } finally {
-            if ( bufferedInputStream != null )
-                try { bufferedInputStream.close(); } catch (IOException ignored) {}
-            if ( conn != null )
+            if (bufferedInputStream != null)
+                try {
+                    bufferedInputStream.close();
+                } catch (IOException ignored) {
+                }
+            if (conn != null)
                 conn.disconnect();
         }
         return bitmap;

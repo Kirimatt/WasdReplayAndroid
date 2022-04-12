@@ -8,7 +8,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ChatMessagesRepository {
-    @GET("streams/{chatId}/messages")
+    @GET("chat/streams/{chatId}/messages")
     Observable<ChatMessagesResponseDto> getChatInfo(
             @Path("chatId") Integer chatId,
             @Query("limit") Integer limit,

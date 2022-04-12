@@ -11,7 +11,11 @@ public class ChatMessagesResponseDto implements Serializable {
     @SerializedName("result")
     private List<Message> messages;
 
-    public List<Message> getResult() {
+    public List<Message> messages() {
+        return messages;
+    }
+
+    public List<Message> getMessages() {
         return messages;
     }
 

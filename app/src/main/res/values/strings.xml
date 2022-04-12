@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WasdAndroid</string>
+    <string name="app_name">Wasd Replay by kirimatt</string>
     <string name="textViewDescription">Вставьте ссылку на реплей. Обязательное условие, что в ссылке должен присутствовать номер реплея. Например, https://wasd.tv/serega_pirat/videos?record=939531</string>
     <string name="urlEditText">URL</string>
     <string name="textViewUrl">Ссылка на реплей</string>
@@ -8,4 +8,5 @@
     <string name="contentDescriptionSticker">Sticker</string>
     <string name="contentDescriptionAvatar">Avatar</string>
     <string name="contentDescriptionModerator">contentDescriptionModerator</string>
+    <string name="imageButtonDesc">imageButtonDesc</string>
 </resources>
