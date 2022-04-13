@@ -9,4 +9,5 @@
     <string name="contentDescriptionAvatar">Avatar</string>
     <string name="contentDescriptionModerator">contentDescriptionModerator</string>
     <string name="imageButtonDesc">imageButtonDesc</string>
+    <string name="savedHistory" />
 </resources>

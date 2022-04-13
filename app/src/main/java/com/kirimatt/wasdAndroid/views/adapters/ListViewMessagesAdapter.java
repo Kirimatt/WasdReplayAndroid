@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kirimatt.wasdAndroid.R;
-import com.kirimatt.wasdAndroid.dtos.ChatMessages.Info;
-import com.kirimatt.wasdAndroid.dtos.ChatMessages.Message;
+import com.kirimatt.wasdAndroid.dtos.chatMessages.Info;
+import com.kirimatt.wasdAndroid.dtos.chatMessages.Message;
 import com.kirimatt.wasdAndroid.utils.ImageManager;
 
 import java.util.List;
@@ -32,7 +32,6 @@ public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
         this.listLayout = listLayout;
         this.messageList = messageList;
     }
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

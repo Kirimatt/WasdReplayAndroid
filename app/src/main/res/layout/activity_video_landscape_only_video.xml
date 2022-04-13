@@ -26,4 +26,12 @@
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
+    <ImageButton
+        android:id="@+id/buttonAutoScrollChat"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:saveEnabled="false"
+        android:visibility="invisible"
+        android:contentDescription="@string/imageButtonDesc" />
+
 </RelativeLayout>

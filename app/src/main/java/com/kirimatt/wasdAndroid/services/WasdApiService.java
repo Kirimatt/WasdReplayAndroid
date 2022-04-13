@@ -1,8 +1,8 @@
 package com.kirimatt.wasdAndroid.services;
 
-import com.kirimatt.wasdAndroid.dtos.ChatMessages.ChatMessagesRequestDto;
-import com.kirimatt.wasdAndroid.dtos.ChatMessages.ChatMessagesResponseDto;
-import com.kirimatt.wasdAndroid.dtos.ChatMessages.Message;
+import com.kirimatt.wasdAndroid.dtos.chatMessages.ChatMessagesRequestDto;
+import com.kirimatt.wasdAndroid.dtos.chatMessages.ChatMessagesResponseDto;
+import com.kirimatt.wasdAndroid.dtos.chatMessages.Message;
 import com.kirimatt.wasdAndroid.dtos.search.SearchRequestDto;
 import com.kirimatt.wasdAndroid.dtos.search.SearchResponseDto;
 import com.kirimatt.wasdAndroid.repositories.ChatMessagesRepository;

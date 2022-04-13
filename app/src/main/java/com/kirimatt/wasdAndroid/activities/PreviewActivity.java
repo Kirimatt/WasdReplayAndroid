@@ -10,11 +10,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.kirimatt.wasdAndroid.R;
-import com.kirimatt.wasdAndroid.dtos.ChatMessages.ChatMessagesRequestDto;
-import com.kirimatt.wasdAndroid.dtos.ChatMessages.Message;
-import com.kirimatt.wasdAndroid.dtos.chatInfo.ChannelPreviewRequestDto;
-import com.kirimatt.wasdAndroid.dtos.chatInfo.ChannelPreviewResponseDto;
-import com.kirimatt.wasdAndroid.dtos.chatInfo.ResultPreviews;
+import com.kirimatt.wasdAndroid.dtos.channelsInfo.ChannelPreviewRequestDto;
+import com.kirimatt.wasdAndroid.dtos.channelsInfo.ChannelPreviewResponseDto;
+import com.kirimatt.wasdAndroid.dtos.channelsInfo.ResultPreviews;
+import com.kirimatt.wasdAndroid.dtos.chatMessages.ChatMessagesRequestDto;
+import com.kirimatt.wasdAndroid.dtos.chatMessages.Message;
 import com.kirimatt.wasdAndroid.dtos.search.Row;
 import com.kirimatt.wasdAndroid.services.WasdApiService;
 import com.kirimatt.wasdAndroid.services.WasdV2ApiService;
@@ -29,23 +29,6 @@ public class PreviewActivity extends AppCompatActivity {
     private Row row;
     private ListView listViewPreviews;
     private ListViewPreviewAdapter adapter;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_preview);
-
-        Intent intent = getIntent();
-        row = (Row) intent.getSerializableExtra(SearchActivity.EXTRA_ACTIVITY_ROW);
-
-        listViewPreviews = findViewById(R.id.listView);
-        listViewPreviews.setOnItemClickListener((adapterView, view, position, id) -> startChat(position));
-
-        progressBar = findViewById(R.id.progressBar);
-
-        initPreviews();
-
-    }
 
     public void initPreviews() {
         new Thread(() -> {
@@ -121,5 +104,22 @@ public class PreviewActivity extends AppCompatActivity {
             });
 
         }).start();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_preview);
+
+        Intent intent = getIntent();
+        row = (Row) intent.getSerializableExtra(SearchActivity.EXTRA_ACTIVITY_ROW);
+
+        listViewPreviews = findViewById(R.id.listView);
+        listViewPreviews.setOnItemClickListener((adapterView, view, position, id) -> startChat(position));
+
+        progressBar = findViewById(R.id.progressBar);
+
+        initPreviews();
+
     }
 }

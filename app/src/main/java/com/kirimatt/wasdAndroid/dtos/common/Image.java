@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Image implements Serializable {
     @SerializedName("large")
@@ -36,6 +37,21 @@ public class Image implements Serializable {
 
     public void setSmall(String small) {
         this.small = small;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Image image = (Image) o;
+        return Objects.equals(large, image.large)
+                && Objects.equals(medium, image.medium)
+                && Objects.equals(small, image.small);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(large, medium, small);
     }
 
     @NonNull

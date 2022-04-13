@@ -7,6 +7,7 @@ import com.kirimatt.wasdAndroid.dtos.common.Image;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 public class Row implements Serializable {
     @SerializedName("channel_id")
@@ -191,5 +192,18 @@ public class Row implements Serializable {
                 ", userId=" + userId +
                 ", userLogin='" + userLogin + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Row row = (Row) o;
+        return channelId == row.channelId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(channelId, createdAt, deletedAt, profileBackground, profileDescription, profileDescriptionEnabled, profileFirstName, profileImage, profileIsLive, profileLastName, profileStreamPreviewImageUrl, profileStreamPushUrl, profileStreamViewUrl, updatedAt, userId, userLogin);
     }
 }

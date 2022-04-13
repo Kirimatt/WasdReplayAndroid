@@ -1,6 +1,6 @@
 package com.kirimatt.wasdAndroid.repositories;
 
-import com.kirimatt.wasdAndroid.dtos.ChatMessages.ChatMessagesResponseDto;
+import com.kirimatt.wasdAndroid.dtos.chatMessages.ChatMessagesResponseDto;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.GET;

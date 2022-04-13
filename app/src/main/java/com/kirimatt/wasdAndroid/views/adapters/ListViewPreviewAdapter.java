@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kirimatt.wasdAndroid.R;
-import com.kirimatt.wasdAndroid.dtos.chatInfo.ResultPreviews;
+import com.kirimatt.wasdAndroid.dtos.channelsInfo.ResultPreviews;
 import com.kirimatt.wasdAndroid.utils.ImageManager;
 
 import java.util.List;
@@ -32,31 +32,34 @@ public class ListViewPreviewAdapter extends ArrayAdapter<ResultPreviews> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //TODO: Fix inflate refresh
-        View listViewItem = inflater.inflate(listLayout, null, false);
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            //TODO: Fix inflate refresh
+            View listViewItem = inflater.inflate(listLayout, null, false);
 
-        ResultPreviews row = previews.get(position);
+            ResultPreviews row = previews.get(position);
 
-        TextView name = listViewItem.findViewById(R.id.textViewName);
-        ImageView imageViewPreview = listViewItem.findViewById(R.id.imageViewAvatar);
+            TextView name = listViewItem.findViewById(R.id.textViewName);
+            ImageView imageViewPreview = listViewItem.findViewById(R.id.imageViewAvatar);
 
-        name.setText(row.getMediaContainerName());
+            name.setText(row.getMediaContainerName());
 
-        //wasd не захотел сделать разные размеры картинок
-        //Выдает одни и те же оригиналы аватарок при вызовах разных размеров, поэтому rescale
-        ImageManager.fetchImage(
-                row.getMediaContainerStreams().get(0)
-                        .getStreamMedia().get(0)
-                        .getMediaMeta()
-                        .getMediaPreviewArchiveImages()
-                        .getMedium(),
-                imageViewPreview,
-                context
-        );
+            //wasd не захотел сделать разные размеры картинок
+            //Выдает одни и те же оригиналы аватарок при вызовах разных размеров, поэтому rescale
+            ImageManager.fetchImage(
+                    row.getMediaContainerStreams().get(0)
+                            .getStreamMedia().get(0)
+                            .getMediaMeta()
+                            .getMediaPreviewArchiveImages()
+                            .getMedium(),
+                    imageViewPreview,
+                    context
+            );
+            return listViewItem;
+        }
 
-        return listViewItem;
+        return convertView;
     }
 
     @Override

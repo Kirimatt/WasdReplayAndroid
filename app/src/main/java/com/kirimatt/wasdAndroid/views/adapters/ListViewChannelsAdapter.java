@@ -31,7 +31,6 @@ public class ListViewChannelsAdapter extends ArrayAdapter<Row> {
         this.channelsList = channelsList;
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -46,7 +45,12 @@ public class ListViewChannelsAdapter extends ArrayAdapter<Row> {
         ImageView imageViewAvatar = listViewItem.findViewById(R.id.imageViewAvatar);
 
         name.setText(row.getUserLogin());
-        int color = Color.argb(255, RANDOM.nextInt(255), RANDOM.nextInt(255), RANDOM.nextInt(255));
+        int color = Color.argb(
+                255,
+                RANDOM.nextInt(255),
+                RANDOM.nextInt(255),
+                RANDOM.nextInt(255)
+        );
         name.setTextColor(color);
 
         //wasd не захотел сделать разные размеры картинок

@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public class ResultSearch implements Serializable {
     @SerializedName("count")
@@ -25,5 +26,18 @@ public class ResultSearch implements Serializable {
 
     public void setRows(List<Row> rows) {
         this.rows = rows;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ResultSearch that = (ResultSearch) o;
+        return count == that.count && Objects.equals(rows, that.rows);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(count, rows);
     }
 }

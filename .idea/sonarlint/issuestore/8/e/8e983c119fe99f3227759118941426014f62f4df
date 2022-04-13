@@ -1,12 +1,0 @@
-
-H
-java:S1948"+Make "deletedAt" transient or serializable.(ùÉ…›8…•«ÿ/
-`
-java:S1948">Make "profileStreamPreviewImageUrl" transient or serializable.(¦±Ù§ÿÿÿÿÿ8…•«ÿ/
-X
-java:S1948"6Make "profileStreamViewUrl" transient or serializable.(¥¤Óıÿÿÿÿ8…•«ÿ/
-P
-java:S1948".Make "profileImage" transient or serializable.(îİŸâûÿÿÿÿ8…•«ÿ/
-P
-java:S1948"3Make "profileBackground" transient or serializable.(ŞÃ“Œ8…•«ÿ/
-t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ßÏØÌûÿÿÿÿ

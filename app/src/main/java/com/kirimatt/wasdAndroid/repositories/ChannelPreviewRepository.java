@@ -1,6 +1,6 @@
 package com.kirimatt.wasdAndroid.repositories;
 
-import com.kirimatt.wasdAndroid.dtos.chatInfo.ChannelPreviewResponseDto;
+import com.kirimatt.wasdAndroid.dtos.channelsInfo.ChannelPreviewResponseDto;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.GET;

@@ -1,6 +1,6 @@
 package com.kirimatt.wasdAndroid.utils;
 
-import com.kirimatt.wasdAndroid.dtos.ChatMessages.Message;
+import com.kirimatt.wasdAndroid.dtos.chatMessages.Message;
 
 import java.util.Date;
 import java.util.List;

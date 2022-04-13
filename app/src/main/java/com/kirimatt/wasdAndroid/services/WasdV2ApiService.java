@@ -1,9 +1,9 @@
 package com.kirimatt.wasdAndroid.services;
 
-import com.kirimatt.wasdAndroid.dtos.chatInfo.ChannelPreviewRequestDto;
-import com.kirimatt.wasdAndroid.dtos.chatInfo.ChannelPreviewResponseDto;
-import com.kirimatt.wasdAndroid.dtos.chatInfo.ChatInfoRequestDto;
-import com.kirimatt.wasdAndroid.dtos.chatInfo.ChatInfoResponseDto;
+import com.kirimatt.wasdAndroid.dtos.channelsInfo.ChannelPreviewRequestDto;
+import com.kirimatt.wasdAndroid.dtos.channelsInfo.ChannelPreviewResponseDto;
+import com.kirimatt.wasdAndroid.dtos.channelsInfo.ChatInfoRequestDto;
+import com.kirimatt.wasdAndroid.dtos.channelsInfo.ChatInfoResponseDto;
 import com.kirimatt.wasdAndroid.repositories.ChannelPreviewRepository;
 import com.kirimatt.wasdAndroid.repositories.ChatInfoRepository;
 
