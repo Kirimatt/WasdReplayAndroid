@@ -49,6 +49,10 @@ public class VideoLandController extends MediaController {
         shrinkSizeButton.setOnClickListener((view1 -> buttonClickShrink.click()));
         addView(shrinkSizeButton);
 
+        float factor = view.getContext()
+                .getResources()
+                .getDisplayMetrics()
+                .density;
 
         RelativeLayout relativeLayout = (RelativeLayout) view;
 
@@ -68,6 +72,11 @@ public class VideoLandController extends MediaController {
                 0
         );
         chatButton.setLayoutParams(layoutParamsChat);
+        chatButton.setPaddingRelative(0,
+                (int)(25 * factor),
+                (int)(25 * factor),
+                0
+        );
         chatButton.setOnClickListener((view1 -> buttonClickChat.click()));
         buttonChatSetVisibleAndEnabled(false);
         relativeLayout.addView(chatButton);
@@ -84,17 +93,18 @@ public class VideoLandController extends MediaController {
 
     @Override
     public void show(int timeout) {
-        buttonChatSetVisibleAndEnabled(true);
         //TODO: Activity com.kirimatt.wasdAndroid.activities.ChatActivity has
         // leaked window DecorView@5fa91f5[] that was originally added here
         // При перемене layout (из-за ориентации) все еще вызывается метод show(int)
         super.show(timeout);
+        buttonChatSetVisibleAndEnabled(true);
     }
 
     @Override
     public void show() {
-        buttonChatSetVisibleAndEnabled(true);
+
         super.show();
+        buttonChatSetVisibleAndEnabled(true);
     }
 
     @Override
