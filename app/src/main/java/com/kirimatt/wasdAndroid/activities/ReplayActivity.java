@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ import android.widget.MediaController;
 import android.widget.RelativeLayout;
 import android.widget.VideoView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,7 +40,7 @@ public class ReplayActivity extends AppCompatActivity {
     private List<Message> listToViewMessages;
     private ListView listView;
     private MediaController mediaController;
-    private AtomicBoolean isChatAutoScrollEnabled = new AtomicBoolean(true);
+    private final AtomicBoolean isChatAutoScrollEnabled = new AtomicBoolean(true);
     private ImageButton buttonChatAutoScroll;
     private ListAdapter adapter;
 
@@ -91,15 +93,29 @@ public class ReplayActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_video_landscape_only_video);
+        RelativeLayout.LayoutParams layoutParamsVideo = new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+        );
+        layoutParamsVideo.addRule(RelativeLayout.CENTER_VERTICAL);
+        layoutParamsVideo.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        layoutParamsVideo.addRule(RelativeLayout.CENTER_IN_PARENT);
+
+        View relativeContainer = findViewById(R.id.video_container);
+        relativeContainer.setLayoutParams(layoutParamsVideo);
     }
 
+    //Locked orientation is necessary to control content of view
+    @SuppressLint("SourceLockedOrientationActivity")
     public void setMediaController(int displayMode) {
         if (displayMode == Configuration.ORIENTATION_PORTRAIT) {
+
             VideoPortraitController videoPortraitController = new VideoPortraitController(this);
             videoPortraitController.setButtonClickFull(
                     () -> setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
             );
             mediaController = videoPortraitController;
+
         } else {
 
             VideoLandController videoLandController = new VideoLandController(this);
@@ -110,18 +126,75 @@ public class ReplayActivity extends AppCompatActivity {
 
             videoLandController.setButtonClickChat(
                     () -> {
-                        MainActivityDataShare.setChatActivated(!MainActivityDataShare.isChatActivated());
-                        recreate();
+                        MainActivityDataShare.setChatActivated(
+                                !MainActivityDataShare.isChatActivated()
+                        );
+                        clickChatInLandscape(MainActivityDataShare.isChatActivated());
                     }
             );
-
 
             mediaController = videoLandController;
         }
     }
 
-    //Locked orientation is necessary to control content of view
-    @SuppressLint("SourceLockedOrientationActivity")
+    private void clickChatInLandscape(boolean isChatActivated) {
+        if (isChatActivated) {
+            float factor = getApplicationContext()
+                    .getResources()
+                    .getDisplayMetrics()
+                    .density;
+
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                    (int) (222 * factor),
+                    ViewGroup.LayoutParams.MATCH_PARENT
+            );
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            listView.setLayoutParams(layoutParams);
+
+            if (!isChatAutoScrollEnabled.get()) {
+                buttonChatAutoScroll.setEnabled(true);
+                buttonChatAutoScroll.setVisibility(View.VISIBLE);
+            }
+
+            RelativeLayout.LayoutParams layoutParamsVideo = new RelativeLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
+            layoutParamsVideo.addRule(RelativeLayout.CENTER_VERTICAL);
+            layoutParamsVideo.addRule(RelativeLayout.CENTER_HORIZONTAL);
+            layoutParamsVideo.addRule(RelativeLayout.START_OF, R.id.listView);
+
+            View relativeContainer = findViewById(R.id.video_container);
+            relativeContainer.setLayoutParams(layoutParamsVideo);
+            videoPlayer.setLayoutParams(layoutParamsVideo);
+
+        } else {
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                    0,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+            );
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            listView.setLayoutParams(layoutParams);
+
+            buttonChatAutoScroll.setEnabled(false);
+            buttonChatAutoScroll.setVisibility(View.GONE);
+
+            RelativeLayout.LayoutParams layoutParamsVideo = new RelativeLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+            );
+            layoutParamsVideo.addRule(RelativeLayout.CENTER_VERTICAL);
+            layoutParamsVideo.addRule(RelativeLayout.CENTER_HORIZONTAL);
+            layoutParamsVideo.addRule(RelativeLayout.CENTER_IN_PARENT);
+
+            View relativeContainer = findViewById(R.id.video_container);
+            relativeContainer.setLayoutParams(layoutParamsVideo);
+            videoPlayer.setLayoutParams(layoutParamsVideo);
+        }
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

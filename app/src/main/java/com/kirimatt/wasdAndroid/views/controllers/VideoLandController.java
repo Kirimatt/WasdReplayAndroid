@@ -84,17 +84,18 @@ public class VideoLandController extends MediaController {
 
     @Override
     public void show(int timeout) {
-        buttonChatSetVisibleAndEnabled(true);
         //TODO: Activity com.kirimatt.wasdAndroid.activities.ChatActivity has
         // leaked window DecorView@5fa91f5[] that was originally added here
         // При перемене layout (из-за ориентации) все еще вызывается метод show(int)
         super.show(timeout);
+        buttonChatSetVisibleAndEnabled(true);
     }
 
     @Override
     public void show() {
-        buttonChatSetVisibleAndEnabled(true);
+
         super.show();
+        buttonChatSetVisibleAndEnabled(true);
     }
 
     @Override
