@@ -39,10 +39,10 @@ public class VideoLandController extends MediaController {
                 0
         );
         shrinkSizeButton.setBackground(null);
-        //TODO: Fix to static access
+
         FrameLayout.LayoutParams layoutParamsShrinkSize = new FrameLayout.LayoutParams(
-                LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT
         );
         layoutParamsShrinkSize.gravity = Gravity.END;
         shrinkSizeButton.setLayoutParams(layoutParamsShrinkSize);
@@ -57,10 +57,10 @@ public class VideoLandController extends MediaController {
         RelativeLayout relativeLayout = (RelativeLayout) view;
 
         chatButton = new Button(this.getContext());
-        //TODO: Fix to static access
+
         RelativeLayout.LayoutParams layoutParamsChat = new RelativeLayout.LayoutParams(
-                LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT
         );
         layoutParamsChat.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         layoutParamsChat.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
@@ -73,8 +73,8 @@ public class VideoLandController extends MediaController {
         );
         chatButton.setLayoutParams(layoutParamsChat);
         chatButton.setPaddingRelative(0,
-                (int)(25 * factor),
-                (int)(25 * factor),
+                (int) (25 * factor),
+                (int) (25 * factor),
                 0
         );
         chatButton.setOnClickListener((view1 -> buttonClickChat.click()));
