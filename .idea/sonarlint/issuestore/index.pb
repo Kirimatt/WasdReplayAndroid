@@ -17,8 +17,6 @@ Mapp/src/main/java/com/kirimatt/wasdAndroid/dtos/search/SearchResponseDto.java,
 Tapp/src/main/java/com/kirimatt/wasdAndroid/repositories/SearchChannelRepository.java,5\a\5ae1a2643b12d360a6db528b0e5eccba01e47cfc
 |
 Lapp/src/main/java/com/kirimatt/wasdAndroid/dtos/search/SearchRequestDto.java,d\3\d3ece45981a37ce2c2cbcc36edf1749fcd28a57f
-‰
-Yapp/src/main/java/com/kirimatt/wasdAndroid/views/controllers/VideoPortraitController.java,2\1\21415cde4b98472f221cf94e0422a7a0a3071e9f
 |
 Lapp/src/main/java/com/kirimatt/wasdAndroid/views/interfaces/ButtonClick.java,a\a\aa3a40898322bec7c7b6ee39649a7c7d7f4594da
 r

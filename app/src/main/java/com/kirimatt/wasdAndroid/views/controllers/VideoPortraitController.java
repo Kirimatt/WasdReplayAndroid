@@ -31,10 +31,10 @@ public class VideoPortraitController extends MediaController {
                 0
         );
         fullSizeButton.setBackground(null);
-        //TODO: Fix to static access
+
         FrameLayout.LayoutParams layoutParamsShrinkSize = new FrameLayout.LayoutParams(
-                LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT,
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT
         );
         layoutParamsShrinkSize.gravity = Gravity.END;
         fullSizeButton.setLayoutParams(layoutParamsShrinkSize);

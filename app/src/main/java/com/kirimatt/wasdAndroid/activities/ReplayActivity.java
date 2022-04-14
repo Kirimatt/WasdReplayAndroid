@@ -3,7 +3,6 @@ package com.kirimatt.wasdAndroid.activities;
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +15,6 @@ import android.widget.MediaController;
 import android.widget.RelativeLayout;
 import android.widget.VideoView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -73,8 +71,8 @@ public class ReplayActivity extends AppCompatActivity {
                         currentMessagePosition--;
                     }
 
-                } catch (NullPointerException e) {
-                    Log.d("CHAT", "is crashed in thread by NPE");
+                } catch (NullPointerException | IllegalStateException e) {
+                    Log.d("CHAT", "is crashed in thread by NPE or ISE");
                     break;
                 }
             }
@@ -249,12 +247,6 @@ public class ReplayActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         MainActivityDataShare.setTimeToSeek(videoPlayer.getCurrentPosition());
-        messages = null;
-        videoPlayer = null;
-        startReplayInMillis = 0;
-        listToViewMessages = null;
-        listView = null;
-        mediaController = null;
         super.onPause();
     }
 
