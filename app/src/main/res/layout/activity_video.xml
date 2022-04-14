@@ -16,12 +16,13 @@
     <RelativeLayout
         android:id="@+id/video_container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
         <VideoView
             android:id="@+id/videoView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="1dp" />
     </RelativeLayout>
@@ -38,6 +39,6 @@
         android:paddingStart="0dp"
         android:src="@drawable/ic_media_chat_resume_autoscroll"
         android:contentDescription="@string/imageButtonDesc"
-        android:background="@color/black"/>
+        android:background="@null"/>
 
 </RelativeLayout>

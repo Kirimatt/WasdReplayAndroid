@@ -44,28 +44,32 @@ public class ListViewChannelsAdapter extends ArrayAdapter<Row> {
         TextView name = listViewItem.findViewById(R.id.textViewName);
         ImageView imageViewAvatar = listViewItem.findViewById(R.id.imageViewAvatar);
 
-        name.setText(row.getUserLogin());
-        int color = Color.argb(
-                255,
-                RANDOM.nextInt(255),
-                RANDOM.nextInt(255),
-                RANDOM.nextInt(255)
-        );
-        name.setTextColor(color);
+        if (row.getUserLogin() != null) {
+            name.setText(row.getUserLogin());
 
+            int color = Color.argb(
+                    255,
+                    RANDOM.nextInt(255),
+                    RANDOM.nextInt(255),
+                    RANDOM.nextInt(255)
+            );
+            name.setTextColor(color);
+        }
         //wasd не захотел сделать разные размеры картинок
         //Выдает одни и те же оригиналы аватарок при вызовах разных размеров, поэтому rescale
         Log.d("CHANNEL", row.toString());
-        ImageManager.fetchImageWithScale(
-                row.getProfileImage().getMedium() == null ?
-                        row.getProfileImage().getLarge() :
-                        row.getProfileImage().getMedium(),
-                imageViewAvatar,
-                context,
-                128,
-                128,
-                false
-        );
+        if (row.getProfileImage() != null) {
+            ImageManager.fetchImageWithScale(
+                    row.getProfileImage().getMedium() == null ?
+                            row.getProfileImage().getLarge() :
+                            row.getProfileImage().getMedium(),
+                    imageViewAvatar,
+                    context,
+                    128,
+                    128,
+                    false
+            );
+        }
 
         return listViewItem;
     }

@@ -49,6 +49,10 @@ public class VideoLandController extends MediaController {
         shrinkSizeButton.setOnClickListener((view1 -> buttonClickShrink.click()));
         addView(shrinkSizeButton);
 
+        float factor = view.getContext()
+                .getResources()
+                .getDisplayMetrics()
+                .density;
 
         RelativeLayout relativeLayout = (RelativeLayout) view;
 
@@ -68,6 +72,11 @@ public class VideoLandController extends MediaController {
                 0
         );
         chatButton.setLayoutParams(layoutParamsChat);
+        chatButton.setPaddingRelative(0,
+                (int)(25 * factor),
+                (int)(25 * factor),
+                0
+        );
         chatButton.setOnClickListener((view1 -> buttonClickChat.click()));
         buttonChatSetVisibleAndEnabled(false);
         relativeLayout.addView(chatButton);

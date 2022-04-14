@@ -3,6 +3,7 @@ package com.kirimatt.wasdAndroid.activities;
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -112,7 +113,10 @@ public class ReplayActivity extends AppCompatActivity {
 
             VideoPortraitController videoPortraitController = new VideoPortraitController(this);
             videoPortraitController.setButtonClickFull(
-                    () -> setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+                    () -> {
+                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                        MainActivityDataShare.setChatActivated(false);
+                    }
             );
             mediaController = videoPortraitController;
 
@@ -162,12 +166,10 @@ public class ReplayActivity extends AppCompatActivity {
                     ViewGroup.LayoutParams.WRAP_CONTENT
             );
             layoutParamsVideo.addRule(RelativeLayout.CENTER_VERTICAL);
-            layoutParamsVideo.addRule(RelativeLayout.CENTER_HORIZONTAL);
             layoutParamsVideo.addRule(RelativeLayout.START_OF, R.id.listView);
 
             View relativeContainer = findViewById(R.id.video_container);
             relativeContainer.setLayoutParams(layoutParamsVideo);
-            videoPlayer.setLayoutParams(layoutParamsVideo);
 
         } else {
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
@@ -186,12 +188,11 @@ public class ReplayActivity extends AppCompatActivity {
                     ViewGroup.LayoutParams.MATCH_PARENT
             );
             layoutParamsVideo.addRule(RelativeLayout.CENTER_VERTICAL);
-            layoutParamsVideo.addRule(RelativeLayout.CENTER_HORIZONTAL);
             layoutParamsVideo.addRule(RelativeLayout.CENTER_IN_PARENT);
+            layoutParamsVideo.addRule(RelativeLayout.CENTER_HORIZONTAL);
 
             View relativeContainer = findViewById(R.id.video_container);
             relativeContainer.setLayoutParams(layoutParamsVideo);
-            videoPlayer.setLayoutParams(layoutParamsVideo);
         }
     }
 
@@ -224,9 +225,12 @@ public class ReplayActivity extends AppCompatActivity {
         setMediaController(displayMode);
 
         videoPlayer.setMediaController(mediaController);
-        mediaController.setAnchorView((RelativeLayout) findViewById(R.id.video_container));
-        videoPlayer.seekTo(MainActivityDataShare.getTimeToSeek());
-        videoPlayer.start();
+
+        videoPlayer.setOnPreparedListener(mediaPlayer -> {
+            mediaController.setAnchorView(findViewById(R.id.video_container));
+            videoPlayer.seekTo(MainActivityDataShare.getTimeToSeek());
+            videoPlayer.start();
+        });
 
         listView = findViewById(R.id.listView);
         listView.setOnScrollListener((CustomOnScrollListener) (absListView, i) -> {

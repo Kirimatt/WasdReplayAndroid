@@ -23,3 +23,7 @@ Yapp/src/main/java/com/kirimatt/wasdAndroid/views/controllers/VideoPortraitContr
 Lapp/src/main/java/com/kirimatt/wasdAndroid/views/interfaces/ButtonClick.java,a\a\aa3a40898322bec7c7b6ee39649a7c7d7f4594da
 r
 Bapp/src/main/java/com/kirimatt/wasdAndroid/utils/ImageManager.java,5\3\53158ca557c558ee20413a7573f20e3789479114
+„
+Tapp/src/main/java/com/kirimatt/wasdAndroid/dtos/channelsInfo/MediaContainerUser.java,9\3\9307264d98bbafe9a4dd680f4648ff83148e58b9
+{
+Kapp/src/main/java/com/kirimatt/wasdAndroid/dtos/channelsInfo/MediaMeta.java,e\6\e626d643d1e6e3f1fdfd54352e86e87e1896c7f1
