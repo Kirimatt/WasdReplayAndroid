@@ -38,16 +38,17 @@ public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //TODO: Fix inflate refresh
-        View listViewItem = inflater.inflate(listLayout, null, false);
+
+        if (convertView == null)
+            convertView = inflater.inflate(listLayout, null, false);
 
         Message targetMessage = messageList.get(position);
 
-        TextView name = listViewItem.findViewById(R.id.textViewName);
-        TextView message = listViewItem.findViewById(R.id.textViewMessage);
-        ImageView imageViewSticker = listViewItem.findViewById(R.id.imageViewSticker);
-        ImageView imageViewAvatar = listViewItem.findViewById(R.id.imageViewAvatar);
-        ImageView imageViewModerator = listViewItem.findViewById(R.id.imageViewModerator);
+        TextView name = convertView.findViewById(R.id.textViewName);
+        TextView message = convertView.findViewById(R.id.textViewMessage);
+        ImageView imageViewSticker = convertView.findViewById(R.id.imageViewSticker);
+        ImageView imageViewAvatar = convertView.findViewById(R.id.imageViewAvatar);
+        ImageView imageViewModerator = convertView.findViewById(R.id.imageViewModerator);
 
         Info info = targetMessage.getInfo();
 
@@ -74,15 +75,23 @@ public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
         );
 
         name.setText(info.getUserLogin());
-        int color = Color.argb(255, RANDOM.nextInt(255), RANDOM.nextInt(255), RANDOM.nextInt(255));
+        int color = Color.argb(
+                255,
+                RANDOM.nextInt(255),
+                RANDOM.nextInt(255),
+                RANDOM.nextInt(255)
+        );
         name.setTextColor(color);
 
         if (targetMessage.getType().equals("MESSAGE")) {
             message.setText(info.getMessage());
-        } else {
-            ImageManager.fetchImage(info.getSticker().getStickerImage().getMedium(), imageViewSticker, context);
+            imageViewSticker.setImageBitmap(null);
+            return convertView;
         }
-        return listViewItem;
+
+        ImageManager.fetchImage(info.getSticker().getStickerImage().getMedium(), imageViewSticker, context);
+        message.setText(null);
+        return convertView;
     }
 
     @Override

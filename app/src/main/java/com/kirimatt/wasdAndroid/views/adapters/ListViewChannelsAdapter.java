@@ -36,13 +36,14 @@ public class ListViewChannelsAdapter extends ArrayAdapter<Row> {
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //TODO: Fix inflate refresh
-        View listViewItem = inflater.inflate(listLayout, null, false);
+
+        if (convertView == null)
+            convertView = inflater.inflate(listLayout, null, false);
 
         Row row = channelsList.get(position);
 
-        TextView name = listViewItem.findViewById(R.id.textViewName);
-        ImageView imageViewAvatar = listViewItem.findViewById(R.id.imageViewAvatar);
+        TextView name = convertView.findViewById(R.id.textViewName);
+        ImageView imageViewAvatar = convertView.findViewById(R.id.imageViewAvatar);
 
         if (row.getUserLogin() != null) {
             name.setText(row.getUserLogin());
@@ -71,7 +72,7 @@ public class ListViewChannelsAdapter extends ArrayAdapter<Row> {
             );
         }
 
-        return listViewItem;
+        return convertView;
     }
 
     @Override

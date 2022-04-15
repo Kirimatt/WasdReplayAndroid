@@ -33,15 +33,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ReplayActivity extends AppCompatActivity {
 
-    private List<Message> messages;
-    private VideoView videoPlayer;
-    private long startReplayInMillis;
-    private List<Message> listToViewMessages;
-    private ListView listView;
-    private MediaController mediaController;
     private final AtomicBoolean isChatAutoScrollEnabled = new AtomicBoolean(true);
     private ImageButton buttonChatAutoScroll;
+    private List<Message> listToViewMessages;
+    private List<Message> messages;
     private ListAdapter adapter;
+    private ListView listView;
+    private MediaController mediaController;
+    private VideoView videoPlayer;
+    private long startReplayInMillis;
 
     public void generateListView() {
 
@@ -83,11 +83,6 @@ public class ReplayActivity extends AppCompatActivity {
     public void decideOrientationContent(int displayMode) {
         if (displayMode == Configuration.ORIENTATION_PORTRAIT) {
             setContentView(R.layout.activity_video);
-            return;
-        }
-
-        if (MainActivityDataShare.isChatActivated()) {
-            setContentView(R.layout.activity_video_landscape);
             return;
         }
 
@@ -140,25 +135,38 @@ public class ReplayActivity extends AppCompatActivity {
     }
 
     private void clickChatInLandscape(boolean isChatActivated) {
+        setListViewWidth(isChatActivated);
+        setButtonChatAutoScroll(isChatActivated);
+        setVideoContainer(isChatActivated);
+    }
+
+    public void setButtonChatAutoScroll(boolean isChatActivated) {
+        if (isChatActivated && !isChatAutoScrollEnabled.get()) {
+            buttonChatAutoScroll.setEnabled(true);
+            buttonChatAutoScroll.setVisibility(View.VISIBLE);
+        } else {
+            buttonChatAutoScroll.setEnabled(false);
+            buttonChatAutoScroll.setVisibility(View.GONE);
+        }
+    }
+
+    public void setListViewWidth(boolean isChatActivated) {
+        float factor = getApplicationContext()
+                .getResources()
+                .getDisplayMetrics()
+                .density;
+
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                isChatActivated ? (int) (222 * factor) : 0,
+                ViewGroup.LayoutParams.MATCH_PARENT
+        );
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        listView.setLayoutParams(layoutParams);
+    }
+
+    public void setVideoContainer(boolean isChatActivated) {
         if (isChatActivated) {
-            float factor = getApplicationContext()
-                    .getResources()
-                    .getDisplayMetrics()
-                    .density;
-
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                    (int) (222 * factor),
-                    ViewGroup.LayoutParams.MATCH_PARENT
-            );
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            listView.setLayoutParams(layoutParams);
-
-            if (!isChatAutoScrollEnabled.get()) {
-                buttonChatAutoScroll.setEnabled(true);
-                buttonChatAutoScroll.setVisibility(View.VISIBLE);
-            }
-
             RelativeLayout.LayoutParams layoutParamsVideo = new RelativeLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
@@ -168,19 +176,7 @@ public class ReplayActivity extends AppCompatActivity {
 
             View relativeContainer = findViewById(R.id.video_container);
             relativeContainer.setLayoutParams(layoutParamsVideo);
-
         } else {
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                    0,
-                    ViewGroup.LayoutParams.MATCH_PARENT
-            );
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            listView.setLayoutParams(layoutParams);
-
-            buttonChatAutoScroll.setEnabled(false);
-            buttonChatAutoScroll.setVisibility(View.GONE);
-
             RelativeLayout.LayoutParams layoutParamsVideo = new RelativeLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT

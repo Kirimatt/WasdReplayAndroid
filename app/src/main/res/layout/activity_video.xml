@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:paddingBottom="25dp"
+        android:paddingBottom="45dp"
         android:paddingEnd="25dp"
         android:paddingTop="0dp"
         android:paddingStart="0dp"
