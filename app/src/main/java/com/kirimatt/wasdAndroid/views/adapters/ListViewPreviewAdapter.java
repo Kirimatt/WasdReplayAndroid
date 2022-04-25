@@ -32,33 +32,30 @@ public class ListViewPreviewAdapter extends ArrayAdapter<ResultPreviews> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            //TODO: Fix inflate refresh
-            View listViewItem = inflater.inflate(listLayout, null, false);
+        LayoutInflater inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            ResultPreviews row = previews.get(position);
+        if (convertView == null)
+            convertView = inflater.inflate(listLayout, null, false);
 
-            TextView name = listViewItem.findViewById(R.id.textViewName);
-            ImageView imageViewPreview = listViewItem.findViewById(R.id.imageViewAvatar);
+        ResultPreviews row = previews.get(position);
 
-            name.setText(row.getMediaContainerName());
+        TextView name = convertView.findViewById(R.id.textViewName);
+        ImageView imageViewPreview = convertView.findViewById(R.id.imageViewAvatar);
 
-            //wasd не захотел сделать разные размеры картинок
-            //Выдает одни и те же оригиналы аватарок при вызовах разных размеров, поэтому rescale
-            ImageManager.fetchImage(
-                    row.getMediaContainerStreams().get(0)
-                            .getStreamMedia().get(0)
-                            .getMediaMeta()
-                            .getMediaPreviewArchiveImages()
-                            .getMedium(),
-                    imageViewPreview,
-                    context
-            );
-            return listViewItem;
-        }
+        name.setText(row.getMediaContainerName());
 
+        //wasd не захотел сделать разные размеры картинок
+        //Выдает одни и те же оригиналы аватарок при вызовах разных размеров, поэтому rescale
+        ImageManager.fetchImage(
+                row.getMediaContainerStreams().get(0)
+                        .getStreamMedia().get(0)
+                        .getMediaMeta()
+                        .getMediaPreviewArchiveImages()
+                        .getMedium(),
+                imageViewPreview,
+                context
+        );
         return convertView;
     }
 
