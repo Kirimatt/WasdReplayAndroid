@@ -17,8 +17,6 @@ Mapp/src/main/java/com/kirimatt/wasdAndroid/dtos/search/SearchResponseDto.java,
 Tapp/src/main/java/com/kirimatt/wasdAndroid/repositories/SearchChannelRepository.java,5\a\5ae1a2643b12d360a6db528b0e5eccba01e47cfc
 |
 Lapp/src/main/java/com/kirimatt/wasdAndroid/dtos/search/SearchRequestDto.java,d\3\d3ece45981a37ce2c2cbcc36edf1749fcd28a57f
-|
-Lapp/src/main/java/com/kirimatt/wasdAndroid/views/interfaces/ButtonClick.java,a\a\aa3a40898322bec7c7b6ee39649a7c7d7f4594da
 „
 Tapp/src/main/java/com/kirimatt/wasdAndroid/dtos/channelsInfo/MediaContainerUser.java,9\3\9307264d98bbafe9a4dd680f4648ff83148e58b9
 {
@@ -27,7 +25,9 @@ y
 Iapp/src/main/java/com/kirimatt/wasdAndroid/dtos/chatMessages/Sticker.java,2\1\213c08acf7b3a948dd0912548bbc7b47e19d4373
 ‡
 Wapp/src/main/java/com/kirimatt/wasdAndroid/views/interfaces/CustomOnScrollListener.java,a\f\af00ef3440311e0bde9a1bf64ae226e558274e6e
-‰
-Yapp/src/main/java/com/kirimatt/wasdAndroid/views/controllers/VideoPortraitController.java,2\1\21415cde4b98472f221cf94e0422a7a0a3071e9f
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+@
+app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
+†
+Vapp/src/main/java/com/kirimatt/wasdAndroid/views/adapters/ListViewChannelsAdapter.java,f\e\fe1950d9bd01138745b69e061b4351d57482447a

@@ -13,7 +13,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.MediaController;
 import android.widget.RelativeLayout;
-import android.widget.VideoView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +24,7 @@ import com.kirimatt.wasdAndroid.views.adapters.ListViewMessagesAdapter;
 import com.kirimatt.wasdAndroid.views.controllers.VideoLandController;
 import com.kirimatt.wasdAndroid.views.controllers.VideoPortraitController;
 import com.kirimatt.wasdAndroid.views.interfaces.CustomOnScrollListener;
+import com.kirimatt.wasdAndroid.views.video.VideoViewWithCustomSeek;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +40,62 @@ public class ReplayActivity extends AppCompatActivity {
     private ListAdapter adapter;
     private ListView listView;
     private MediaController mediaController;
-    private VideoView videoPlayer;
+    private VideoViewWithCustomSeek videoPlayer;
     private long startReplayInMillis;
+    private int currentMessagePosition;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        int displayMode = getResources().getConfiguration().orientation;
+
+        decideOrientationContent(displayMode);
+
+        // Убрать ActionBar
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
+        buttonChatAutoScroll = findViewById(R.id.buttonAutoScrollChat);
+
+        buttonChatAutoScroll.setOnClickListener(view -> {
+            buttonChatAutoScroll.setVisibility(View.GONE);
+            buttonChatAutoScroll.setEnabled(false);
+            isChatAutoScrollEnabled.set(true);
+            listView.setSelection(adapter.getCount() - 1);
+        });
+
+        buttonChatAutoScroll.setVisibility(View.GONE);
+        buttonChatAutoScroll.setEnabled(false);
+
+        videoPlayer = findViewById(R.id.videoView);
+        videoPlayer.setVideoURI(Uri.parse(MainActivityDataShare.getUriString()));
+
+        setMediaController(displayMode);
+
+        videoPlayer.setMediaController(mediaController);
+
+        videoPlayer.setOnPreparedListener(mediaPlayer -> {
+            mediaController.setAnchorView(findViewById(R.id.video_container));
+            videoPlayer.seekTo(MainActivityDataShare.getTimeToSeek());
+            videoPlayer.start();
+        });
+
+        listView = findViewById(R.id.listView);
+        listView.setOnScrollListener((CustomOnScrollListener) (absListView, i) -> {
+            buttonChatAutoScroll.setVisibility(View.VISIBLE);
+            buttonChatAutoScroll.setEnabled(true);
+            isChatAutoScrollEnabled.set(false);
+        });
+
+        messages = MainActivityDataShare.getMessages();
+        startReplayInMillis = MainActivityDataShare.getStartReplay().getTime();
+
+        listToViewMessages = new ArrayList<>(messages.size());
+
+        generateListView();
+
+        videoPlayer.setButtonClick(this::onSeekToPrev);
+    }
 
     public void generateListView() {
 
@@ -53,9 +107,9 @@ public class ReplayActivity extends AppCompatActivity {
         );
 
         listView.setAdapter(adapter);
-        //TODO: on seekTo(millis) recreate?
+
         new Thread(() -> {
-            int currentMessagePosition = messages.size() - 1;
+            currentMessagePosition = messages.size() - 1;
             while (currentMessagePosition >= 0) {
                 try {
 
@@ -190,54 +244,11 @@ public class ReplayActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    private void onSeekToPrev() {
+        listToViewMessages.clear();
+        currentMessagePosition = messages.size() - 1;
 
-        int displayMode = getResources().getConfiguration().orientation;
-
-        decideOrientationContent(displayMode);
-
-        // Убрать ActionBar
-        Objects.requireNonNull(getSupportActionBar()).hide();
-
-        buttonChatAutoScroll = findViewById(R.id.buttonAutoScrollChat);
-
-        buttonChatAutoScroll.setOnClickListener(view -> {
-            buttonChatAutoScroll.setVisibility(View.GONE);
-            buttonChatAutoScroll.setEnabled(false);
-            isChatAutoScrollEnabled.set(true);
-            listView.setSelection(adapter.getCount() - 1);
-        });
-
-        buttonChatAutoScroll.setVisibility(View.GONE);
-        buttonChatAutoScroll.setEnabled(false);
-
-        videoPlayer = findViewById(R.id.videoView);
-        videoPlayer.setVideoURI(Uri.parse(MainActivityDataShare.getUriString()));
-
-        setMediaController(displayMode);
-
-        videoPlayer.setMediaController(mediaController);
-
-        videoPlayer.setOnPreparedListener(mediaPlayer -> {
-            mediaController.setAnchorView(findViewById(R.id.video_container));
-            videoPlayer.seekTo(MainActivityDataShare.getTimeToSeek());
-            videoPlayer.start();
-        });
-
-        listView = findViewById(R.id.listView);
-        listView.setOnScrollListener((CustomOnScrollListener) (absListView, i) -> {
-            buttonChatAutoScroll.setVisibility(View.VISIBLE);
-            buttonChatAutoScroll.setEnabled(true);
-            isChatAutoScrollEnabled.set(false);
-        });
-
-        messages = MainActivityDataShare.getMessages();
-        startReplayInMillis = MainActivityDataShare.getStartReplay().getTime();
-
-        listToViewMessages = new ArrayList<>(messages.size());
-        generateListView();
+        listView.setAdapter(adapter);
     }
 
     @Override
@@ -249,6 +260,7 @@ public class ReplayActivity extends AppCompatActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
+        //TODO: find not deprecated method and variables
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
