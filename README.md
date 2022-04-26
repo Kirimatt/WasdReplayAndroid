@@ -6,6 +6,8 @@ https://github.com/Kirimatt/WasdReplayAndroid/blob/master/app/build/intermediate
 
 1. Скачать апк файл
 
+![image](https://user-images.githubusercontent.com/58257256/165364433-7ff0b751-852a-4e01-8eb5-ffd8cd5f2800.png)
+
 2. Разрешить установку из интернета и установить на телефон
 
 3. Зайти в приложение
