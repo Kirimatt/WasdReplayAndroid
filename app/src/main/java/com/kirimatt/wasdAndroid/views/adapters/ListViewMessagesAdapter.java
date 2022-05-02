@@ -89,6 +89,13 @@ public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
             return convertView;
         }
 
+        if (targetMessage.getType().equals("HIGHLIGHTED_MESSAGE")) {
+            message.setText(info.getMessage());
+            message.setTextColor(color);
+            imageViewSticker.setImageBitmap(null);
+            return convertView;
+        }
+
         ImageManager.fetchImage(info.getSticker().getStickerImage().getMedium(), imageViewSticker, context);
         message.setText(null);
         return convertView;

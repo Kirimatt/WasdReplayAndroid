@@ -31,3 +31,7 @@ P
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 †
 Vapp/src/main/java/com/kirimatt/wasdAndroid/views/adapters/ListViewChannelsAdapter.java,f\e\fe1950d9bd01138745b69e061b4351d57482447a
+{
+Kapp/src/main/java/com/kirimatt/wasdAndroid/utils/MainActivityDataShare.java,0\5\05e63b1b847817dcfbf67f37f71ed686aa1402ef
+|
+Lapp/src/main/java/com/kirimatt/wasdAndroid/views/interfaces/ButtonClick.java,a\a\aa3a40898322bec7c7b6ee39649a7c7d7f4594da
