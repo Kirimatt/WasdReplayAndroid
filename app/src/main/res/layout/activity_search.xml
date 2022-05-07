@@ -6,21 +6,63 @@
     android:background="@color/black"
     tools:context=".activities.SearchActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#575454"
+        android:minHeight="?attr/actionBarSize">
+
+        <TextView
+            android:layout_gravity="start"
+            android:id="@+id/textViewActivityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wasd_replay_by_kirimatt"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:typeface="sans"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:background="#575454"
+            android:layout_gravity="end"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp">
+
+            <ImageButton
+                android:id="@+id/imageButtonSettings"
+                android:layout_width="wrap_content"
+                android:background="#575454"
+                android:textColor="#fff"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_setting_two_svg_repo_com"
+                android:contentDescription="@string/imageButtonDesc" />
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
     <EditText
         android:id="@+id/searchEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
         android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:layout_toStartOf="@id/searchButton"
         android:layout_marginEnd="10dp"
-        android:layout_marginStart="5dp"
+        android:layout_toStartOf="@id/searchButton"
         android:autofillHints="Введите каналы для поиска"
-        android:inputType="text"
-        android:labelFor="@id/searchEditText"
-        android:textColor="@color/black"
         android:background="@color/white"
-        android:textSize="25sp"
+        android:hint="@string/search_edit_text"
+        android:inputType="text"
+        android:labelFor="@id/searchButton"
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         android:textStyle="normal"
         android:typeface="sans" />
 
@@ -29,10 +71,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_below="@id/toolbar"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="15dp"
         android:contentDescription="@string/imageButtonDesc"
-        android:src="@drawable/ic_search_button"
+        android:src="@drawable/ic_search_svg_repo_com"
         android:background="@color/black"/>
 
     <ListView

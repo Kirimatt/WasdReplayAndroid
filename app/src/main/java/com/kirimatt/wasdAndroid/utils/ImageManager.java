@@ -46,7 +46,12 @@ public class ImageManager {
             return;
 
         if (IMAGE_MAP.containsKey(iUrl)) {
-            iView.setImageBitmap(IMAGE_MAP.get(iUrl));
+            iView.setImageBitmap(width == 0 && height == 0 ? IMAGE_MAP.get(iUrl) : Bitmap.createScaledBitmap(
+                    IMAGE_MAP.get(iUrl),
+                    width,
+                    height,
+                    isPixelated
+            ));
             return;
         }
 

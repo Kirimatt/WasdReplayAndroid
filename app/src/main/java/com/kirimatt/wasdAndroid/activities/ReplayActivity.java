@@ -1,8 +1,10 @@
 package com.kirimatt.wasdAndroid.activities;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,12 +15,14 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.MediaController;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.kirimatt.wasdAndroid.R;
 import com.kirimatt.wasdAndroid.dtos.chatMessages.Message;
+import com.kirimatt.wasdAndroid.dtos.settings.AllSettings;
 import com.kirimatt.wasdAndroid.utils.MainActivityDataShare;
 import com.kirimatt.wasdAndroid.views.adapters.ListViewMessagesAdapter;
 import com.kirimatt.wasdAndroid.views.controllers.VideoLandController;
@@ -33,6 +37,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ReplayActivity extends AppCompatActivity {
 
+    private static final int TIME_OFFSET_DELAY_MILLIS = 15000;
     private final AtomicBoolean isChatAutoScrollEnabled = new AtomicBoolean(true);
     private ImageButton buttonChatAutoScroll;
     private List<Message> listToViewMessages;
@@ -51,9 +56,6 @@ public class ReplayActivity extends AppCompatActivity {
         int displayMode = getResources().getConfiguration().orientation;
 
         decideOrientationContent(displayMode);
-
-        // Убрать ActionBar
-        Objects.requireNonNull(getSupportActionBar()).hide();
 
         buttonChatAutoScroll = findViewById(R.id.buttonAutoScrollChat);
 
@@ -95,15 +97,63 @@ public class ReplayActivity extends AppCompatActivity {
         generateListView();
 
         videoPlayer.setButtonClick(this::onSeekToPrev);
+
+        MediaPlayer.OnErrorListener myVideoViewErrorListener = (mp, what, extra) -> {
+
+            String errWhat;
+            switch (what){
+                case MediaPlayer.MEDIA_ERROR_UNKNOWN:
+                    errWhat = "MEDIA_ERROR_UNKNOWN";
+                    break;
+                case MediaPlayer.MEDIA_ERROR_SERVER_DIED:
+                    errWhat = "MEDIA_ERROR_SERVER_DIED";
+                    break;
+                default: errWhat = "unknown what";
+            }
+
+            String errExtra;
+            switch (extra){
+                case MediaPlayer.MEDIA_ERROR_IO:
+                    errExtra = "MEDIA_ERROR_IO";
+                    break;
+                case MediaPlayer.MEDIA_ERROR_MALFORMED:
+                    errExtra = "MEDIA_ERROR_MALFORMED";
+                    break;
+                case MediaPlayer.MEDIA_ERROR_UNSUPPORTED:
+                    errExtra = "MEDIA_ERROR_UNSUPPORTED";
+                    break;
+                case MediaPlayer.MEDIA_ERROR_TIMED_OUT:
+                    errExtra = "MEDIA_ERROR_TIMED_OUT";
+                    break;
+                default:
+                    errExtra = "...others";
+
+            }
+
+            Toast.makeText(getApplicationContext(),
+                    "Error!!!\n" +
+                            "what: " + errWhat + "\n" +
+                            "extra: " + errExtra,
+                    Toast.LENGTH_LONG).show();
+            return true;
+        };
+
+        videoPlayer.setOnErrorListener(myVideoViewErrorListener);
     }
 
     public void generateListView() {
+
+        SharedPreferences sharedPref = getSharedPreferences("setting", MODE_PRIVATE);
+        AllSettings allSettings = new AllSettings(sharedPref);
+
+        Log.d("ALLSETTINGS", allSettings.toString());
 
         adapter = new ListViewMessagesAdapter(
                 getApplicationContext(),
                 R.layout.activity_video_row,
                 R.id.textViewName,
-                listToViewMessages
+                listToViewMessages,
+                allSettings
         );
 
         listView.setAdapter(adapter);
@@ -113,7 +163,8 @@ public class ReplayActivity extends AppCompatActivity {
             while (currentMessagePosition >= 0) {
                 try {
 
-                    if (isChatAutoScrollEnabled.get() && videoPlayer.getCurrentPosition() >=
+                    if (isChatAutoScrollEnabled.get() && videoPlayer.getCurrentPosition()
+                            + TIME_OFFSET_DELAY_MILLIS >=
                             messages.get(currentMessagePosition).getDateTime().getTime()
                                     - startReplayInMillis) {
                         int finalCurrentMessagePosition = currentMessagePosition;

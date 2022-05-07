@@ -36,7 +36,7 @@
         android:paddingEnd="25dp"
         android:paddingTop="0dp"
         android:paddingStart="0dp"
-        android:src="@drawable/ic_media_chat_resume_autoscroll"
+        android:src="@drawable/ic_down_c_svg_repo_com"
         android:contentDescription="@string/imageButtonDesc"
         android:background="@null"/>
 

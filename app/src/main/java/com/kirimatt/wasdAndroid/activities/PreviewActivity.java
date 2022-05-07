@@ -3,6 +3,7 @@ package com.kirimatt.wasdAndroid.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import com.kirimatt.wasdAndroid.utils.MainActivityDataShare;
 import com.kirimatt.wasdAndroid.views.adapters.ListViewPreviewAdapter;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PreviewActivity extends AppCompatActivity {
 
@@ -120,6 +122,12 @@ public class PreviewActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
         initPreviews();
+
+        ImageButton imageButtonSettings = findViewById(R.id.imageButtonSettings);
+        imageButtonSettings.setOnClickListener(view -> {
+            Intent intentSettings = new Intent(this, SettingsActivity.class);
+            startActivity(intentSettings);
+        });
 
     }
 }

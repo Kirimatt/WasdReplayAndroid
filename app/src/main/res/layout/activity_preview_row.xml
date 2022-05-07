@@ -8,27 +8,43 @@
 
 
     <ImageView
-        android:id="@+id/imageViewAvatar"
-        android:layout_width="wrap_content"
+        android:id="@+id/imageViewPreview"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="1dp"
-        android:layout_centerHorizontal="true"
         android:contentDescription="@string/contentDescriptionAvatar" />
 
-    <TextView
-        android:id="@+id/textViewName"
-        android:layout_width="match_parent"
+    <RelativeLayout
         android:layout_height="wrap_content"
-        android:layout_below="@id/imageViewAvatar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="1dp"
-        android:text=""
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="normal"
-        android:typeface="sans" />
+        android:layout_width="wrap_content"
+        android:layout_below="@id/imageViewPreview">
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/textViewDate"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="1dp"
+            android:layout_marginEnd="5dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:typeface="sans" />
 
+        <TextView
+            android:id="@+id/textViewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_alignParentEnd="true"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:typeface="sans" />
+    </RelativeLayout>
 
 
 </RelativeLayout>

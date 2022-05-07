@@ -12,6 +12,11 @@ import com.kirimatt.wasdAndroid.R;
 import com.kirimatt.wasdAndroid.dtos.channelsInfo.ResultPreviews;
 import com.kirimatt.wasdAndroid.utils.ImageManager;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 public class ListViewPreviewAdapter extends ArrayAdapter<ResultPreviews> {
@@ -28,7 +33,6 @@ public class ListViewPreviewAdapter extends ArrayAdapter<ResultPreviews> {
         this.previews = previews;
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -41,9 +45,13 @@ public class ListViewPreviewAdapter extends ArrayAdapter<ResultPreviews> {
         ResultPreviews row = previews.get(position);
 
         TextView name = convertView.findViewById(R.id.textViewName);
-        ImageView imageViewPreview = convertView.findViewById(R.id.imageViewAvatar);
+        TextView date = convertView.findViewById(R.id.textViewDate);
+        ImageView imageViewPreview = convertView.findViewById(R.id.imageViewPreview);
 
         name.setText(row.getMediaContainerName());
+
+        LocalDate dateLocal = row.getPublishedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        date.setText(dateLocal.toString());
 
         //wasd не захотел сделать разные размеры картинок
         //Выдает одни и те же оригиналы аватарок при вызовах разных размеров, поэтому rescale
@@ -52,7 +60,7 @@ public class ListViewPreviewAdapter extends ArrayAdapter<ResultPreviews> {
                         .getStreamMedia().get(0)
                         .getMediaMeta()
                         .getMediaPreviewArchiveImages()
-                        .getMedium(),
+                        .getLarge(),
                 imageViewPreview,
                 context
         );
