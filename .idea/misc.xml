@@ -3,6 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_arrow_drop_down_circle_24.xml" value="0.2235" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_close_fullscreen_24.xml" value="0.2235" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_done_24.xml" value="0.2235" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_fullscreen_24.xml" value="0.2235" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_fullscreen_exit_24.xml" value="0.2235" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_open_in_full_24.xml" value="0.2235" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_question_answer_24.xml" value="0.2235" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_search_24.xml" value="0.2235" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_settings_24.xml" value="0.2235" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.501" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable/ic_chat_svgrepo_com.xml" value="0.214" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable/ic_down_c_svg_repo_com.xml" value="0.322" />

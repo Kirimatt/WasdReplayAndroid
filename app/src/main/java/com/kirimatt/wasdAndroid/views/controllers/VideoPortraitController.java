@@ -25,7 +25,7 @@ public class VideoPortraitController extends MediaController {
 
         Button fullSizeButton = new Button(this.getContext());
         fullSizeButton.setCompoundDrawablesWithIntrinsicBounds(
-                R.drawable.ic_expand_fullscreen_svgrepo_com,
+                R.drawable.baseline_fullscreen_24,
                 0,
                 0,
                 0

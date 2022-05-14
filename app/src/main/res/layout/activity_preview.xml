@@ -32,11 +32,11 @@
             <ImageButton
                 android:id="@+id/imageButtonSettings"
                 android:layout_width="wrap_content"
-                android:background="#575454"
-                android:textColor="#fff"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_setting_two_svg_repo_com"
-                android:contentDescription="@string/imageButtonDesc" />
+                android:background="#575454"
+                android:contentDescription="@string/imageButtonDesc"
+                android:src="@drawable/baseline_settings_24"
+                android:textColor="#fff" />
 
         </LinearLayout>
 

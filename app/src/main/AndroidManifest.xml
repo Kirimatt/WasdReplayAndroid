@@ -13,8 +13,7 @@
         android:theme="@style/Theme.WasdAndroid">
         <activity
             android:name=".activities.SettingsActivity"
-            android:exported="false"
-            android:parentActivityName=".activities.SearchActivity"/>
+            android:exported="false" />
         <activity
             android:name=".activities.SearchActivity"
             android:exported="true"

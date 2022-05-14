@@ -1,23 +1,19 @@
 package com.kirimatt.wasdAndroid.views.adapters;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.res.ResourcesCompat;
+
 import com.kirimatt.wasdAndroid.R;
-import com.kirimatt.wasdAndroid.dtos.search.Row;
 import com.kirimatt.wasdAndroid.dtos.settings.RowSettings;
-import com.kirimatt.wasdAndroid.utils.ImageManager;
 
 import java.util.List;
-import java.util.Random;
 
 public class ListViewSettingsAdapter extends ArrayAdapter<RowSettings> {
     private final int listLayout;
@@ -44,12 +40,15 @@ public class ListViewSettingsAdapter extends ArrayAdapter<RowSettings> {
         RowSettings row = channelsList.get(position);
 
         TextView name = convertView.findViewById(R.id.textViewSetting);
-        CheckBox checkBox = convertView.findViewById(R.id.checkboxSetting);
+        ImageView checkBoxImage = convertView.findViewById(R.id.checkboxSetting);
 
         name.setText(row.getNameSetting());
 
-        checkBox.setChecked(row.getStatus());
-        checkBox.setEnabled(false);
+        checkBoxImage.setImageDrawable(
+                Boolean.TRUE.equals(row.getStatus()) ?
+                        ResourcesCompat.getDrawable(context.getResources(),
+                                R.drawable.baseline_done_24, null) : null
+        );
 
         return convertView;
     }

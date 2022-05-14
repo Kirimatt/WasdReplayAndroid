@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="3dp">
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/textViewSetting"
@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckBox
+    <ImageView
         android:id="@+id/checkboxSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,9 +32,11 @@
         android:layout_marginTop="1dp"
         android:buttonTint="#FFFFFF"
         android:textColor="#FFFFFF"
+        android:src="@drawable/baseline_done_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/imageButtonDesc" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

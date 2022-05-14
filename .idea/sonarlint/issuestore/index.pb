@@ -28,8 +28,6 @@ Sapp/src/main/java/com/kirimatt/wasdAndroid/views/video/VideoViewWithCustomSeek.
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-v
-Fapp/src/main/java/com/kirimatt/wasdAndroid/dtos/chatMessages/Info.java,0\b\0b450b2b07784f7a179b3add5b6d647393f0ec9b
 >
 app/.gitignore,5\1\51e1c5d383dfaa35e0e7e5873a0a99355a86880f
 €
@@ -46,3 +44,7 @@ X
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 w
 Gapp/src/main/java/com/kirimatt/wasdAndroid/services/WasdApiService.java,a\2\a2674c2f0a7e466db2d5ebb4106ab6716ef63c1c
+y
+Iapp/src/main/java/com/kirimatt/wasdAndroid/dtos/settings/AllSettings.java,3\d\3d5891d0b44d6ed4f3f9cdc63870a3898ac70752
+y
+Iapp/src/main/java/com/kirimatt/wasdAndroid/dtos/settings/RowSettings.java,0\4\0427d9925a79f8455b7b61a15ee33ea293b1aba2

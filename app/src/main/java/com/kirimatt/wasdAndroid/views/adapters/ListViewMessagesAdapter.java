@@ -18,7 +18,6 @@ import com.kirimatt.wasdAndroid.dtos.chatMessages.Message;
 import com.kirimatt.wasdAndroid.dtos.settings.AllSettings;
 import com.kirimatt.wasdAndroid.utils.ImageManager;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
@@ -32,6 +31,8 @@ public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
     private final List<Message> messageList;
     private final Context context;
     private final AllSettings allSettings;
+    private float factor;
+    private int finalScale;
 
     public ListViewMessagesAdapter(Context context, int listLayout,
                                    int field, List<Message> messageList, AllSettings allSettings) {
@@ -40,6 +41,20 @@ public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
         this.listLayout = listLayout;
         this.messageList = messageList;
         this.allSettings = allSettings;
+
+        this.factor = context
+                .getResources()
+                .getDisplayMetrics()
+                .density;
+
+        this.finalScale = (int) (20 * factor);
+
+        ImageManager.preDownloadWithScale(
+                MODERATOR_URL,
+                finalScale,
+                finalScale,
+                false
+        );
     }
 
     public int getRandomColor() {
@@ -88,13 +103,6 @@ public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
             date.setText(getLocalTimeString(dateTimeLocal));
             date.setTextColor(Color.WHITE);
         }
-
-        float factor = convertView.getContext()
-                .getResources()
-                .getDisplayMetrics()
-                .density;
-
-        int finalScale = (int) (20 * factor);
 
         if (allSettings.isModerators() && info.getUserChannelRole().equals("CHANNEL_MODERATOR")) {
             ImageManager.fetchImageWithScale(
@@ -166,7 +174,7 @@ public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
 
         String nameText = info.getUserLogin() + ": ";
         name.setText(nameText);
-        name.setTextColor(getRandomColor());
+        name.setTextColor(allSettings.isMono() ? Color.WHITE : getRandomColor());
 
         if (allSettings.isStickers()) {
             ImageManager.fetchImage(

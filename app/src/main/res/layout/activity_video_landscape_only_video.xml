@@ -38,7 +38,7 @@
         android:paddingEnd="25dp"
         android:paddingTop="0dp"
         android:paddingStart="0dp"
-        android:src="@drawable/ic_down_c_svg_repo_com"
+        android:src="@drawable/baseline_arrow_drop_down_circle_24"
         android:contentDescription="@string/imageButtonDesc"
         android:background="@null"
         android:saveEnabled="false"

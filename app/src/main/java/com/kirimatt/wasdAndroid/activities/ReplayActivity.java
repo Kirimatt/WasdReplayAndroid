@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.kirimatt.wasdAndroid.R;
 import com.kirimatt.wasdAndroid.dtos.chatMessages.Message;
 import com.kirimatt.wasdAndroid.dtos.settings.AllSettings;
+import com.kirimatt.wasdAndroid.utils.ImageManager;
 import com.kirimatt.wasdAndroid.utils.MainActivityDataShare;
 import com.kirimatt.wasdAndroid.views.adapters.ListViewMessagesAdapter;
 import com.kirimatt.wasdAndroid.views.controllers.VideoLandController;
@@ -32,7 +33,6 @@ import com.kirimatt.wasdAndroid.views.video.VideoViewWithCustomSeek;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ReplayActivity extends AppCompatActivity {
@@ -48,12 +48,19 @@ public class ReplayActivity extends AppCompatActivity {
     private VideoViewWithCustomSeek videoPlayer;
     private long startReplayInMillis;
     private int currentMessagePosition;
+    private float factor;
+    private int finalSizeAvatar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         int displayMode = getResources().getConfiguration().orientation;
+        factor = getApplicationContext()
+                .getResources()
+                .getDisplayMetrics()
+                .density;
+        finalSizeAvatar = (int) (factor * 64);
 
         decideOrientationContent(displayMode);
 
@@ -101,18 +108,19 @@ public class ReplayActivity extends AppCompatActivity {
         MediaPlayer.OnErrorListener myVideoViewErrorListener = (mp, what, extra) -> {
 
             String errWhat;
-            switch (what){
+            switch (what) {
                 case MediaPlayer.MEDIA_ERROR_UNKNOWN:
                     errWhat = "MEDIA_ERROR_UNKNOWN";
                     break;
                 case MediaPlayer.MEDIA_ERROR_SERVER_DIED:
                     errWhat = "MEDIA_ERROR_SERVER_DIED";
                     break;
-                default: errWhat = "unknown what";
+                default:
+                    errWhat = "unknown what";
             }
 
             String errExtra;
-            switch (extra){
+            switch (extra) {
                 case MediaPlayer.MEDIA_ERROR_IO:
                     errExtra = "MEDIA_ERROR_IO";
                     break;
@@ -146,8 +154,6 @@ public class ReplayActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("setting", MODE_PRIVATE);
         AllSettings allSettings = new AllSettings(sharedPref);
 
-        Log.d("ALLSETTINGS", allSettings.toString());
-
         adapter = new ListViewMessagesAdapter(
                 getApplicationContext(),
                 R.layout.activity_video_row,
@@ -160,6 +166,7 @@ public class ReplayActivity extends AppCompatActivity {
 
         new Thread(() -> {
             currentMessagePosition = messages.size() - 1;
+            boolean preloaded = false;
             while (currentMessagePosition >= 0) {
                 try {
 
@@ -171,9 +178,24 @@ public class ReplayActivity extends AppCompatActivity {
                         runOnUiThread(() -> {
                             listToViewMessages.add(messages.get(finalCurrentMessagePosition));
                             listView.setAdapter(adapter);
-                            listView.setSelection(adapter.getCount() - 1);
+                            listView.setSelection(adapter.getCount());
                         });
                         currentMessagePosition--;
+
+                        preloaded = false;
+
+                    } else if (!preloaded) {
+                        ImageManager.preDownloadWithScale(
+                                messages.get(currentMessagePosition)
+                                        .getInfo()
+                                        .getUserAvatar()
+                                        .getSmall(),
+                                finalSizeAvatar,
+                                finalSizeAvatar,
+                                false
+                        );
+
+                        preloaded = true;
                     }
 
                 } catch (NullPointerException | IllegalStateException e) {
@@ -256,11 +278,6 @@ public class ReplayActivity extends AppCompatActivity {
     }
 
     public void setListViewWidth(boolean isChatActivated) {
-        float factor = getApplicationContext()
-                .getResources()
-                .getDisplayMetrics()
-                .density;
-
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                 isChatActivated ? (int) (222 * factor) : 0,
                 ViewGroup.LayoutParams.MATCH_PARENT
