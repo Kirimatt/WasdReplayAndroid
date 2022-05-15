@@ -19,8 +19,6 @@ Tapp/src/main/java/com/kirimatt/wasdAndroid/dtos/channelsInfo/MediaContainerUser
 Kapp/src/main/java/com/kirimatt/wasdAndroid/dtos/channelsInfo/MediaMeta.java,e\6\e626d643d1e6e3f1fdfd54352e86e87e1896c7f1
 y
 Iapp/src/main/java/com/kirimatt/wasdAndroid/dtos/chatMessages/Sticker.java,2\1\213c08acf7b3a948dd0912548bbc7b47e19d4373
-‡
-Wapp/src/main/java/com/kirimatt/wasdAndroid/views/interfaces/CustomOnScrollListener.java,a\f\af00ef3440311e0bde9a1bf64ae226e558274e6e
 |
 Lapp/src/main/java/com/kirimatt/wasdAndroid/views/interfaces/ButtonClick.java,a\a\aa3a40898322bec7c7b6ee39649a7c7d7f4594da
 ƒ
@@ -30,8 +28,6 @@ Sapp/src/main/java/com/kirimatt/wasdAndroid/views/video/VideoViewWithCustomSeek.
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 >
 app/.gitignore,5\1\51e1c5d383dfaa35e0e7e5873a0a99355a86880f
-€
-Papp/src/main/java/com/kirimatt/wasdAndroid/dtos/channelsInfo/ResultPreviews.java,1\4\14a9d5589208fe61d4122ad00ad64cacda425079
 ?
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 A
@@ -48,3 +44,11 @@ y
 Iapp/src/main/java/com/kirimatt/wasdAndroid/dtos/settings/AllSettings.java,3\d\3d5891d0b44d6ed4f3f9cdc63870a3898ac70752
 y
 Iapp/src/main/java/com/kirimatt/wasdAndroid/dtos/settings/RowSettings.java,0\4\0427d9925a79f8455b7b61a15ee33ea293b1aba2
+v
+Fapp/src/main/java/com/kirimatt/wasdAndroid/dtos/chatMessages/Info.java,0\b\0b450b2b07784f7a179b3add5b6d647393f0ec9b
+{
+Kapp/src/main/java/com/kirimatt/wasdAndroid/utils/MainActivityDataShare.java,0\5\05e63b1b847817dcfbf67f37f71ed686aa1402ef
+†
+Vapp/src/main/java/com/kirimatt/wasdAndroid/views/adapters/ListViewSettingsAdapter.java,b\3\b31f914a32860e3680d85d70d12a53f7bdcb9d59
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e

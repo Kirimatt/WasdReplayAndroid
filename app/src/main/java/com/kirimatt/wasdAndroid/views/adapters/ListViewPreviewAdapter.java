@@ -12,11 +12,8 @@ import com.kirimatt.wasdAndroid.R;
 import com.kirimatt.wasdAndroid.dtos.channelsInfo.ResultPreviews;
 import com.kirimatt.wasdAndroid.utils.ImageManager;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 public class ListViewPreviewAdapter extends ArrayAdapter<ResultPreviews> {

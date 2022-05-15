@@ -23,7 +23,6 @@ import com.kirimatt.wasdAndroid.utils.MainActivityDataShare;
 import com.kirimatt.wasdAndroid.views.adapters.ListViewPreviewAdapter;
 
 import java.util.List;
-import java.util.Objects;
 
 public class PreviewActivity extends AppCompatActivity {
 
@@ -39,12 +38,19 @@ public class PreviewActivity extends AppCompatActivity {
             ChannelPreviewResponseDto responseDto =
                     WasdV2ApiService.getPreviews(new ChannelPreviewRequestDto(row.getChannelId()));
 
+            List<ResultPreviews> previews = responseDto.getResults();
+
+            previews.removeIf(resultPreviews -> resultPreviews
+                    .getMediaContainerStatus()
+                    .equals("RUNNING")
+            );
+
             runOnUiThread(() -> {
                 adapter = new ListViewPreviewAdapter(
                         getApplicationContext(),
                         R.layout.activity_preview_row,
                         R.id.textViewName,
-                        responseDto.getResults()
+                        previews
                 );
 
                 listViewPreviews.setAdapter(adapter);

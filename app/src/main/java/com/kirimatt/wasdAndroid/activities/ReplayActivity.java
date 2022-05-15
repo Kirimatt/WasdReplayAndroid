@@ -1,6 +1,5 @@
 package com.kirimatt.wasdAndroid.activities;
 
-import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -10,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -28,7 +28,6 @@ import com.kirimatt.wasdAndroid.utils.MainActivityDataShare;
 import com.kirimatt.wasdAndroid.views.adapters.ListViewMessagesAdapter;
 import com.kirimatt.wasdAndroid.views.controllers.VideoLandController;
 import com.kirimatt.wasdAndroid.views.controllers.VideoPortraitController;
-import com.kirimatt.wasdAndroid.views.interfaces.CustomOnScrollListener;
 import com.kirimatt.wasdAndroid.views.video.VideoViewWithCustomSeek;
 
 import java.util.ArrayList;
@@ -50,12 +49,13 @@ public class ReplayActivity extends AppCompatActivity {
     private int currentMessagePosition;
     private float factor;
     private int finalSizeAvatar;
+    private int displayMode;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int displayMode = getResources().getConfiguration().orientation;
+        displayMode = getResources().getConfiguration().orientation;
         factor = getApplicationContext()
                 .getResources()
                 .getDisplayMetrics()
@@ -90,10 +90,24 @@ public class ReplayActivity extends AppCompatActivity {
         });
 
         listView = findViewById(R.id.listView);
-        listView.setOnScrollListener((CustomOnScrollListener) (absListView, i) -> {
-            buttonChatAutoScroll.setVisibility(View.VISIBLE);
-            buttonChatAutoScroll.setEnabled(true);
-            isChatAutoScrollEnabled.set(false);
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                buttonChatAutoScroll.setVisibility(View.VISIBLE);
+                buttonChatAutoScroll.setEnabled(true);
+                isChatAutoScrollEnabled.set(false);
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
+                if (firstVisibleItem + visibleItemCount == totalItemCount) {
+                    buttonChatAutoScroll.setVisibility(View.GONE);
+                    buttonChatAutoScroll.setEnabled(false);
+                    isChatAutoScrollEnabled.set(true);
+                }
+            }
         });
 
         messages = MainActivityDataShare.getMessages();
@@ -226,8 +240,6 @@ public class ReplayActivity extends AppCompatActivity {
         relativeContainer.setLayoutParams(layoutParamsVideo);
     }
 
-    //Locked orientation is necessary to control content of view
-    @SuppressLint("SourceLockedOrientationActivity")
     public void setMediaController(int displayMode) {
         if (displayMode == Configuration.ORIENTATION_PORTRAIT) {
 
@@ -245,7 +257,7 @@ public class ReplayActivity extends AppCompatActivity {
             VideoLandController videoLandController = new VideoLandController(this);
 
             videoLandController.setButtonClickShrink(
-                    () -> setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                    () -> setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
             );
 
             videoLandController.setButtonClickChat(
@@ -328,14 +340,14 @@ public class ReplayActivity extends AppCompatActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        //TODO: find not deprecated method and variables
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-        );
+        if (displayMode == Configuration.ORIENTATION_LANDSCAPE)
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+            );
     }
 }
