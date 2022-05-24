@@ -11,10 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.WasdAndroid">
-
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.SearchActivity"
             android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,12 +28,13 @@
         <activity
             android:name=".activities.ReplayActivity"
             android:exported="false"
-            android:parentActivityName=".activities.PreviewActivity" />
+            android:parentActivityName=".activities.PreviewActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activities.PreviewActivity"
             android:exported="false"
-            android:parentActivityName=".activities.SearchActivity">
-        </activity>
+            android:parentActivityName=".activities.SearchActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

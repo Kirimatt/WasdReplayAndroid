@@ -3,10 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_arrow_drop_down_circle_24.xml" value="0.2235" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_close_fullscreen_24.xml" value="0.2235" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_done_24.xml" value="0.2235" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_fullscreen_24.xml" value="0.2235" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_fullscreen_exit_24.xml" value="0.2235" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_open_in_full_24.xml" value="0.2235" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_question_answer_24.xml" value="0.2235" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_search_24.xml" value="0.2235" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/baseline_settings_24.xml" value="0.2235" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.501" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable/ic_chat_svgrepo_com.xml" value="0.214" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable/ic_down_c_svg_repo_com.xml" value="0.322" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable/ic_down_c_svgrepo_com.xml" value="0.265" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable/ic_expand_fullscreen_svgrepo_com.xml" value="0.214" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable/ic_launcher_background.xml" value="0.422" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable/ic_search_svg_repo_com.xml" value="0.322" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable/ic_search_svgrepo_com.xml" value="0.209" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable/ic_setting_two_svg_repo_com.xml" value="0.431" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable/ic_setting_two_svgrepo_com.xml" value="0.1" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable/ic_shrink_svgrepo_com.xml" value="0.214" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/drawable/icon.xml" value="0.193" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout-land/activity_chat.xml" value="0.35625" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout-land/activity_chat_portrait.xml" value="0.35625" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout-v28/activity_settings_row.xml" value="0.2695035460992908" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_chat.xml" value="0.33" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_chat_landscape.xml" value="0.3453125" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_chat_landscape_no_chat.xml" value="0.1933876811594203" />
@@ -17,9 +37,11 @@
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_preview_row.xml" value="0.30978260869565216" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_search.xml" value="0.32083333333333336" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_search_row.xml" value="0.30978260869565216" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_settings.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_settings_row.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_video.xml" value="0.30978260869565216" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_video_landscape.xml" value="0.30978260869565216" />
-        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_video_landscape_only_video.xml" value="0.1" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_video_landscape_only_video.xml" value="0.33" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_video_player.xml" value="0.3140625" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/activity_video_row.xml" value="0.30978260869565216" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/channel_preview_row.xml" value="0.32083333333333336" />
@@ -27,7 +49,10 @@
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/media_controller.xml" value="0.31354166666666666" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/rounded_edittext.xml" value="0.30978260869565216" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/row.xml" value="0.5" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/sample_toolbar.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/search_row.xml" value="0.32083333333333336" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/support_action_bar.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/layout/toolbar.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2525" />
         <entry key="..\:/Users/kirimatt/AndroidStudioProjects/WasdAndroid/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2525" />
       </map>

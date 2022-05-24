@@ -1,10 +1,6 @@
 
-?
-settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 
 Oapp/src/main/java/com/kirimatt/wasdandroid/repositories/ChatInfoRepository.java,2\9\29c91fd2542481d42b4c75da7eb86d6de28da53c
-<
-build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 y
 Iapp/src/main/java/com/kirimatt/wasdAndroid/dtos/ChatMessages/Sticker.java,c\e\ce93cdd530f25aed5bf3570fe633529a461300b8
 y
@@ -23,15 +19,32 @@ Tapp/src/main/java/com/kirimatt/wasdAndroid/dtos/channelsInfo/MediaContainerUser
 Kapp/src/main/java/com/kirimatt/wasdAndroid/dtos/channelsInfo/MediaMeta.java,e\6\e626d643d1e6e3f1fdfd54352e86e87e1896c7f1
 y
 Iapp/src/main/java/com/kirimatt/wasdAndroid/dtos/chatMessages/Sticker.java,2\1\213c08acf7b3a948dd0912548bbc7b47e19d4373
-‡
-Wapp/src/main/java/com/kirimatt/wasdAndroid/views/interfaces/CustomOnScrollListener.java,a\f\af00ef3440311e0bde9a1bf64ae226e558274e6e
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
-@
-app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
-†
-Vapp/src/main/java/com/kirimatt/wasdAndroid/views/adapters/ListViewChannelsAdapter.java,f\e\fe1950d9bd01138745b69e061b4351d57482447a
-{
-Kapp/src/main/java/com/kirimatt/wasdAndroid/utils/MainActivityDataShare.java,0\5\05e63b1b847817dcfbf67f37f71ed686aa1402ef
 |
 Lapp/src/main/java/com/kirimatt/wasdAndroid/views/interfaces/ButtonClick.java,a\a\aa3a40898322bec7c7b6ee39649a7c7d7f4594da
+ƒ
+Sapp/src/main/java/com/kirimatt/wasdAndroid/views/video/VideoViewWithCustomSeek.java,f\9\f9a4377a663da5bfcad2ee5e4392cb141810e9d3
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+>
+app/.gitignore,5\1\51e1c5d383dfaa35e0e7e5873a0a99355a86880f
+?
+settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
+A
+gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
+F
+app/proguard-rules.pro,9\e\9e08934d811afe28fbc77aaa3c0d747b94348db9
+X
+(gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
+w
+Gapp/src/main/java/com/kirimatt/wasdAndroid/services/WasdApiService.java,a\2\a2674c2f0a7e466db2d5ebb4106ab6716ef63c1c
+y
+Iapp/src/main/java/com/kirimatt/wasdAndroid/dtos/settings/AllSettings.java,3\d\3d5891d0b44d6ed4f3f9cdc63870a3898ac70752
+y
+Iapp/src/main/java/com/kirimatt/wasdAndroid/dtos/settings/RowSettings.java,0\4\0427d9925a79f8455b7b61a15ee33ea293b1aba2
+†
+Vapp/src/main/java/com/kirimatt/wasdAndroid/views/adapters/ListViewSettingsAdapter.java,b\3\b31f914a32860e3680d85d70d12a53f7bdcb9d59
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e

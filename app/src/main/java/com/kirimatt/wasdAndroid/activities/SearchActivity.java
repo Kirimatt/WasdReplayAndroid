@@ -156,5 +156,11 @@ public class SearchActivity extends AppCompatActivity {
 
             listViewChannels.setAdapter(adapter);
         }
+
+        ImageButton imageButtonSettings = findViewById(R.id.imageButtonSettings);
+        imageButtonSettings.setOnClickListener(view -> {
+            Intent intentSettings = new Intent(this, SettingsActivity.class);
+            startActivity(intentSettings);
+        });
     }
 }

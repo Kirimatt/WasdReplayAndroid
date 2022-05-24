@@ -1,13 +1,15 @@
 package com.kirimatt.wasdAndroid.activities;
 
-import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -19,20 +21,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.kirimatt.wasdAndroid.R;
 import com.kirimatt.wasdAndroid.dtos.chatMessages.Message;
+import com.kirimatt.wasdAndroid.dtos.settings.AllSettings;
+import com.kirimatt.wasdAndroid.utils.ImageManager;
 import com.kirimatt.wasdAndroid.utils.MainActivityDataShare;
 import com.kirimatt.wasdAndroid.views.adapters.ListViewMessagesAdapter;
 import com.kirimatt.wasdAndroid.views.controllers.VideoLandController;
 import com.kirimatt.wasdAndroid.views.controllers.VideoPortraitController;
-import com.kirimatt.wasdAndroid.views.interfaces.CustomOnScrollListener;
 import com.kirimatt.wasdAndroid.views.video.VideoViewWithCustomSeek;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ReplayActivity extends AppCompatActivity {
 
+    private static final int TIME_OFFSET_DELAY_MILLIS = 17000;
+    private static final long DELAY_CREATION = 25000;
     private final AtomicBoolean isChatAutoScrollEnabled = new AtomicBoolean(true);
     private ImageButton buttonChatAutoScroll;
     private List<Message> listToViewMessages;
@@ -43,17 +47,22 @@ public class ReplayActivity extends AppCompatActivity {
     private VideoViewWithCustomSeek videoPlayer;
     private long startReplayInMillis;
     private int currentMessagePosition;
+    private float factor;
+    private int finalSizeAvatar;
+    private int displayMode;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int displayMode = getResources().getConfiguration().orientation;
+        displayMode = getResources().getConfiguration().orientation;
+        factor = getApplicationContext()
+                .getResources()
+                .getDisplayMetrics()
+                .density;
+        finalSizeAvatar = (int) (factor * 64);
 
         decideOrientationContent(displayMode);
-
-        // Убрать ActionBar
-        Objects.requireNonNull(getSupportActionBar()).hide();
 
         buttonChatAutoScroll = findViewById(R.id.buttonAutoScrollChat);
 
@@ -78,13 +87,28 @@ public class ReplayActivity extends AppCompatActivity {
             mediaController.setAnchorView(findViewById(R.id.video_container));
             videoPlayer.seekTo(MainActivityDataShare.getTimeToSeek());
             videoPlayer.start();
+            onSeekToPrev();
         });
 
         listView = findViewById(R.id.listView);
-        listView.setOnScrollListener((CustomOnScrollListener) (absListView, i) -> {
-            buttonChatAutoScroll.setVisibility(View.VISIBLE);
-            buttonChatAutoScroll.setEnabled(true);
-            isChatAutoScrollEnabled.set(false);
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                buttonChatAutoScroll.setVisibility(View.VISIBLE);
+                buttonChatAutoScroll.setEnabled(true);
+                isChatAutoScrollEnabled.set(false);
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
+                if (firstVisibleItem + visibleItemCount == totalItemCount) {
+                    buttonChatAutoScroll.setVisibility(View.GONE);
+                    buttonChatAutoScroll.setEnabled(false);
+                    isChatAutoScrollEnabled.set(true);
+                }
+            }
         });
 
         messages = MainActivityDataShare.getMessages();
@@ -95,34 +119,103 @@ public class ReplayActivity extends AppCompatActivity {
         generateListView();
 
         videoPlayer.setButtonClick(this::onSeekToPrev);
+
+        MediaPlayer.OnErrorListener myVideoViewErrorListener = (mp, what, extra) -> {
+
+            String errWhat;
+            switch (what) {
+                case MediaPlayer.MEDIA_ERROR_UNKNOWN:
+                    errWhat = "MEDIA_ERROR_UNKNOWN";
+                    break;
+                case MediaPlayer.MEDIA_ERROR_SERVER_DIED:
+                    errWhat = "MEDIA_ERROR_SERVER_DIED";
+                    break;
+                default:
+                    errWhat = "unknown what";
+            }
+
+            String errExtra;
+            switch (extra) {
+                case MediaPlayer.MEDIA_ERROR_IO:
+                    errExtra = "MEDIA_ERROR_IO";
+                    break;
+                case MediaPlayer.MEDIA_ERROR_MALFORMED:
+                    errExtra = "MEDIA_ERROR_MALFORMED";
+                    break;
+                case MediaPlayer.MEDIA_ERROR_UNSUPPORTED:
+                    errExtra = "MEDIA_ERROR_UNSUPPORTED";
+                    break;
+                case MediaPlayer.MEDIA_ERROR_TIMED_OUT:
+                    errExtra = "MEDIA_ERROR_TIMED_OUT";
+                    break;
+                default:
+                    errExtra = "...others";
+
+            }
+
+
+            Log.d("Error!!!",
+                    "what: " + errWhat + "\n" +
+                            "extra: " + errExtra + "\n" +
+                            "time: " + MainActivityDataShare.getTimeToSeek());
+
+            videoPlayer.refreshDrawableState();
+            videoPlayer.setVideoURI(Uri.parse(MainActivityDataShare.getUriString()));
+            videoPlayer.start();
+
+            return true;
+        };
+
+        videoPlayer.setOnErrorListener(myVideoViewErrorListener);
     }
 
     public void generateListView() {
+
+        SharedPreferences sharedPref = getSharedPreferences("setting", MODE_PRIVATE);
+        AllSettings allSettings = new AllSettings(sharedPref);
 
         adapter = new ListViewMessagesAdapter(
                 getApplicationContext(),
                 R.layout.activity_video_row,
                 R.id.textViewName,
-                listToViewMessages
+                listToViewMessages,
+                allSettings
         );
 
         listView.setAdapter(adapter);
 
         new Thread(() -> {
             currentMessagePosition = messages.size() - 1;
+            boolean preloaded = false;
             while (currentMessagePosition >= 0) {
                 try {
 
-                    if (isChatAutoScrollEnabled.get() && videoPlayer.getCurrentPosition() >=
+                    if (isChatAutoScrollEnabled.get() && videoPlayer.getCurrentPosition()
+                            + TIME_OFFSET_DELAY_MILLIS + DELAY_CREATION >=
                             messages.get(currentMessagePosition).getDateTime().getTime()
                                     - startReplayInMillis) {
                         int finalCurrentMessagePosition = currentMessagePosition;
                         runOnUiThread(() -> {
                             listToViewMessages.add(messages.get(finalCurrentMessagePosition));
                             listView.setAdapter(adapter);
-                            listView.setSelection(adapter.getCount() - 1);
+                            listView.setSelection(adapter.getCount());
                         });
                         currentMessagePosition--;
+
+                        preloaded = false;
+
+                    } else if (!preloaded) {
+                        ImageManager.preDownloadWithScale(
+                                messages.get(currentMessagePosition)
+                                        .getInfo()
+                                        .getUserAvatar()
+                                        .getSmall(),
+                                finalSizeAvatar,
+                                finalSizeAvatar,
+                                false
+                        );
+
+                        preloaded = true;
                     }
 
                 } catch (NullPointerException | IllegalStateException e) {
@@ -153,8 +246,6 @@ public class ReplayActivity extends AppCompatActivity {
         relativeContainer.setLayoutParams(layoutParamsVideo);
     }
 
-    //Locked orientation is necessary to control content of view
-    @SuppressLint("SourceLockedOrientationActivity")
     public void setMediaController(int displayMode) {
         if (displayMode == Configuration.ORIENTATION_PORTRAIT) {
 
@@ -172,7 +263,7 @@ public class ReplayActivity extends AppCompatActivity {
             VideoLandController videoLandController = new VideoLandController(this);
 
             videoLandController.setButtonClickShrink(
-                    () -> setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                    () -> setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
             );
 
             videoLandController.setButtonClickChat(
@@ -205,11 +296,6 @@ public class ReplayActivity extends AppCompatActivity {
     }
 
     public void setListViewWidth(boolean isChatActivated) {
-        float factor = getApplicationContext()
-                .getResources()
-                .getDisplayMetrics()
-                .density;
-
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                 isChatActivated ? (int) (222 * factor) : 0,
                 ViewGroup.LayoutParams.MATCH_PARENT
@@ -260,14 +346,14 @@ public class ReplayActivity extends AppCompatActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        //TODO: find not deprecated method and variables
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-        );
+        if (displayMode == Configuration.ORIENTATION_LANDSCAPE)
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+            );
     }
 }

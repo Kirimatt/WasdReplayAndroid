@@ -37,28 +37,17 @@ public class ListViewChannelsAdapter extends ArrayAdapter<Row> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if (convertView == null)
-            convertView = inflater.inflate(listLayout, null, false);
+        //TODO: fix update avatars
+        // when search - repeat avatars
+        convertView = inflater.inflate(listLayout, null, false);
 
-        Row row = channelsList.get(position);
+        Row row = channelsList.get(channelsList.size() - position - 1);
 
         TextView name = convertView.findViewById(R.id.textViewName);
         ImageView imageViewAvatar = convertView.findViewById(R.id.imageViewAvatar);
 
-        if (row.getUserLogin() != null) {
-            name.setText(row.getUserLogin());
-
-            int color = Color.argb(
-                    255,
-                    RANDOM.nextInt(255),
-                    RANDOM.nextInt(255),
-                    RANDOM.nextInt(255)
-            );
-            name.setTextColor(color);
-        }
         //wasd не захотел сделать разные размеры картинок
         //Выдает одни и те же оригиналы аватарок при вызовах разных размеров, поэтому rescale
-        Log.d("CHANNEL", row.toString());
         if (row.getProfileImage() != null) {
             ImageManager.fetchImageWithScale(
                     row.getProfileImage().getMedium() == null ?
@@ -72,12 +61,24 @@ public class ListViewChannelsAdapter extends ArrayAdapter<Row> {
             );
         }
 
+        if (row.getUserLogin() != null) {
+            name.setText(row.getUserLogin());
+
+            int color = Color.argb(
+                    255,
+                    RANDOM.nextInt(255),
+                    RANDOM.nextInt(255),
+                    RANDOM.nextInt(255)
+            );
+            name.setTextColor(color);
+        }
+
         return convertView;
     }
 
     @Override
     public Row getItem(int position) {
-        return channelsList.get(position);
+        return channelsList.get(channelsList.size() - position - 1);
     }
 
 }

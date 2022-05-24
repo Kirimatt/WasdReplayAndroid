@@ -31,6 +31,31 @@ public class ImageManager {
     private ImageManager() {
     }
 
+    public static void preDownloadWithScale(final String iUrl,
+                                            int width, int height, boolean isPixelated) {
+        if (iUrl == null || IMAGE_MAP.containsKey(iUrl))
+            return;
+
+        // данный способ не оправдал себя ввиду загруженности и падения приложения из-за
+        // заполнения памяти и блокирования garbage collector`а
+        // UPD Оптимизация: теперь загружает в случае если сообщение на очереди, но не должно
+        // выводиться по времени именно сейчас
+        ScheduledExecutorService backgroundExecutor = Executors.newSingleThreadScheduledExecutor();
+
+        backgroundExecutor.execute(() -> {
+            final Bitmap image = width == 0 && height == 0 ?
+                    downloadImage(iUrl) :
+                    Bitmap.createScaledBitmap(
+                            downloadImage(iUrl),
+                            width,
+                            height,
+                            isPixelated
+                    );
+
+            IMAGE_MAP.put(iUrl, image);
+        });
+    }
+
     public static void fetchImage(final String iUrl, final ImageView iView, Context context) {
         fetchImageAll(iUrl, iView, context, 0, 0, false);
     }
@@ -46,7 +71,12 @@ public class ImageManager {
             return;
 
         if (IMAGE_MAP.containsKey(iUrl)) {
-            iView.setImageBitmap(IMAGE_MAP.get(iUrl));
+            iView.setImageBitmap(width == 0 && height == 0 ? IMAGE_MAP.get(iUrl) : Bitmap.createScaledBitmap(
+                    IMAGE_MAP.get(iUrl),
+                    width,
+                    height,
+                    isPixelated
+            ));
             return;
         }
 

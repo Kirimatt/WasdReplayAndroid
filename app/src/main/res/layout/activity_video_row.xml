@@ -3,8 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="1dp">
 
+    <TextView
+        android:id="@+id/textViewDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginStart="6dp"
+        android:text=""
+        android:textSize="15sp"
+        android:textStyle="normal"
+        android:typeface="sans" />
 
     <ImageView
         android:id="@+id/imageViewAvatar"
@@ -12,21 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="1dp"
+        android:layout_toEndOf="@id/textViewDate"
+        android:layout_marginStart="5dp"
         android:contentDescription="@string/contentDescriptionAvatar" />
-
-
-    <TextView
-        android:id="@+id/textViewName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="1dp"
-        android:layout_toEndOf="@id/imageViewModerator"
-        android:layout_marginStart="3dp"
-        android:text=""
-        android:textSize="15sp"
-        android:textStyle="normal"
-        android:typeface="sans" />
 
     <ImageView
         android:id="@+id/imageViewModerator"
@@ -39,27 +38,27 @@
         android:contentDescription="@string/contentDescriptionModerator" />
 
     <TextView
-        android:id="@+id/textViewMessage"
-        android:layout_width="match_parent"
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewName"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="1dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="1dp"
+        android:layout_toEndOf="@id/imageViewModerator"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="6dp"
         android:text=""
-        android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="normal"
         android:typeface="sans" />
+
 
     <ImageView
         android:id="@+id/imageViewSticker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewName"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/textViewName"
         android:layout_marginBottom="1dp"
+        android:layout_marginStart="5dp"
         android:contentDescription="@string/contentDescriptionSticker" />
 
 </RelativeLayout>

@@ -2,7 +2,9 @@ package com.kirimatt.wasdAndroid.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -37,12 +39,19 @@ public class PreviewActivity extends AppCompatActivity {
             ChannelPreviewResponseDto responseDto =
                     WasdV2ApiService.getPreviews(new ChannelPreviewRequestDto(row.getChannelId()));
 
+            List<ResultPreviews> previews = responseDto.getResults();
+
+            previews.removeIf(resultPreviews -> resultPreviews
+                    .getMediaContainerStatus()
+                    .equals("RUNNING")
+            );
+
             runOnUiThread(() -> {
                 adapter = new ListViewPreviewAdapter(
                         getApplicationContext(),
                         R.layout.activity_preview_row,
                         R.id.textViewName,
-                        responseDto.getResults()
+                        previews
                 );
 
                 listViewPreviews.setAdapter(adapter);
@@ -71,19 +80,10 @@ public class PreviewActivity extends AppCompatActivity {
                             .getMediaContainerStreams().get(0).getStreamId())
             );
 
+            Log.d("published", resultPreviews.getPublishedAt().toString());
+            Log.d("created", resultPreviews.getCreatedAt().toString());
+
             runOnUiThread(() -> {
-
-                //Проверка загруженных сообщений
-                if (messages.isEmpty()) {
-                    Toast.makeText(
-                            getApplicationContext(),
-                            "Произошла ошибка при загрузке сообщений",
-                            Toast.LENGTH_LONG
-                    ).show();
-
-                    return;
-                }
-
                 //Запуск новой активности
                 //Статический класс для содержания и передачи сообщений
                 MainActivityDataShare.setMessages(messages);
@@ -97,7 +97,9 @@ public class PreviewActivity extends AppCompatActivity {
                                 .getMediaMeta()
                                 .getMediaArchiveUrl()
                 );
-
+                MainActivityDataShare.setCreatedDelay((resultPreviews.getPublishedAt().getTime()
+                        - resultPreviews.getCreatedAt().getTime()) * 2);
+                Log.d("CreatedDelay", String.valueOf(MainActivityDataShare.getCreatedDelay()));
                 onUiLoad(false);
                 Intent intent = new Intent(this, ReplayActivity.class);
                 startActivity(intent);
@@ -120,6 +122,12 @@ public class PreviewActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
         initPreviews();
+
+        ImageButton imageButtonSettings = findViewById(R.id.imageButtonSettings);
+        imageButtonSettings.setOnClickListener(view -> {
+            Intent intentSettings = new Intent(this, SettingsActivity.class);
+            startActivity(intentSettings);
+        });
 
     }
 }

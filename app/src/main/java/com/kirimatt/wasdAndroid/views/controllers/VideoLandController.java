@@ -33,7 +33,7 @@ public class VideoLandController extends MediaController {
 
         Button shrinkSizeButton = new Button(this.getContext());
         shrinkSizeButton.setCompoundDrawablesWithIntrinsicBounds(
-                R.drawable.ic_media_fullscreen_shrink,
+                R.drawable.baseline_fullscreen_exit_24,
                 0,
                 0,
                 0
@@ -66,7 +66,7 @@ public class VideoLandController extends MediaController {
         layoutParamsChat.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         chatButton.setBackground(null);
         chatButton.setCompoundDrawablesWithIntrinsicBounds(
-                R.drawable.ic_media_chat_button,
+                R.drawable.baseline_question_answer_24,
                 0,
                 0,
                 0
