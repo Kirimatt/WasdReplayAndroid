@@ -26,7 +26,7 @@ public class SettingsActivity extends AppCompatActivity {
     private void init() {
         sharedPref = getSharedPreferences("setting", MODE_PRIVATE);
         settings.add(new RowSettings(
-                "Дата сообщения в чате",
+                "Время сообщения в чате",
                 "DATE_NEEDED",
                 sharedPref.getBoolean("DATE_NEEDED", true))
         );

@@ -44,10 +44,6 @@ y
 Iapp/src/main/java/com/kirimatt/wasdAndroid/dtos/settings/AllSettings.java,3\d\3d5891d0b44d6ed4f3f9cdc63870a3898ac70752
 y
 Iapp/src/main/java/com/kirimatt/wasdAndroid/dtos/settings/RowSettings.java,0\4\0427d9925a79f8455b7b61a15ee33ea293b1aba2
-v
-Fapp/src/main/java/com/kirimatt/wasdAndroid/dtos/chatMessages/Info.java,0\b\0b450b2b07784f7a179b3add5b6d647393f0ec9b
-{
-Kapp/src/main/java/com/kirimatt/wasdAndroid/utils/MainActivityDataShare.java,0\5\05e63b1b847817dcfbf67f37f71ed686aa1402ef
 †
 Vapp/src/main/java/com/kirimatt/wasdAndroid/views/adapters/ListViewSettingsAdapter.java,b\3\b31f914a32860e3680d85d70d12a53f7bdcb9d59
 P

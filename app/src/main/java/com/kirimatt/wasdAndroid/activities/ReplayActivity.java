@@ -15,7 +15,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.MediaController;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,7 +35,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ReplayActivity extends AppCompatActivity {
 
-    private static final int TIME_OFFSET_DELAY_MILLIS = 15000;
+    private static final int TIME_OFFSET_DELAY_MILLIS = 17000;
+    private static final long DELAY_CREATION = 25000;
     private final AtomicBoolean isChatAutoScrollEnabled = new AtomicBoolean(true);
     private ImageButton buttonChatAutoScroll;
     private List<Message> listToViewMessages;
@@ -87,6 +87,7 @@ public class ReplayActivity extends AppCompatActivity {
             mediaController.setAnchorView(findViewById(R.id.video_container));
             videoPlayer.seekTo(MainActivityDataShare.getTimeToSeek());
             videoPlayer.start();
+            onSeekToPrev();
         });
 
         listView = findViewById(R.id.listView);
@@ -152,11 +153,16 @@ public class ReplayActivity extends AppCompatActivity {
 
             }
 
-            Toast.makeText(getApplicationContext(),
-                    "Error!!!\n" +
-                            "what: " + errWhat + "\n" +
-                            "extra: " + errExtra,
-                    Toast.LENGTH_LONG).show();
+
+            Log.d("Error!!!",
+                    "what: " + errWhat + "\n" +
+                            "extra: " + errExtra + "\n" +
+                            "time: " + MainActivityDataShare.getTimeToSeek());
+
+            videoPlayer.refreshDrawableState();
+            videoPlayer.setVideoURI(Uri.parse(MainActivityDataShare.getUriString()));
+            videoPlayer.start();
+
             return true;
         };
 
@@ -185,7 +191,7 @@ public class ReplayActivity extends AppCompatActivity {
                 try {
 
                     if (isChatAutoScrollEnabled.get() && videoPlayer.getCurrentPosition()
-                            + TIME_OFFSET_DELAY_MILLIS >=
+                            + TIME_OFFSET_DELAY_MILLIS + DELAY_CREATION >=
                             messages.get(currentMessagePosition).getDateTime().getTime()
                                     - startReplayInMillis) {
                         int finalCurrentMessagePosition = currentMessagePosition;

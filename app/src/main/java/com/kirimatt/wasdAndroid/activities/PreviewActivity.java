@@ -2,6 +2,7 @@ package com.kirimatt.wasdAndroid.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -79,19 +80,10 @@ public class PreviewActivity extends AppCompatActivity {
                             .getMediaContainerStreams().get(0).getStreamId())
             );
 
+            Log.d("published", resultPreviews.getPublishedAt().toString());
+            Log.d("created", resultPreviews.getCreatedAt().toString());
+
             runOnUiThread(() -> {
-
-                //Проверка загруженных сообщений
-                if (messages.isEmpty()) {
-                    Toast.makeText(
-                            getApplicationContext(),
-                            "Произошла ошибка при загрузке сообщений",
-                            Toast.LENGTH_LONG
-                    ).show();
-
-                    return;
-                }
-
                 //Запуск новой активности
                 //Статический класс для содержания и передачи сообщений
                 MainActivityDataShare.setMessages(messages);
@@ -105,7 +97,9 @@ public class PreviewActivity extends AppCompatActivity {
                                 .getMediaMeta()
                                 .getMediaArchiveUrl()
                 );
-
+                MainActivityDataShare.setCreatedDelay((resultPreviews.getPublishedAt().getTime()
+                        - resultPreviews.getCreatedAt().getTime()) * 2);
+                Log.d("CreatedDelay", String.valueOf(MainActivityDataShare.getCreatedDelay()));
                 onUiLoad(false);
                 Intent intent = new Intent(this, ReplayActivity.class);
                 startActivity(intent);

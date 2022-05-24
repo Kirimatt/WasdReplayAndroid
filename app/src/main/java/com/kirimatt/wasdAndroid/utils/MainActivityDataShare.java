@@ -12,9 +12,18 @@ public class MainActivityDataShare {
     private static Date startReplay;
     private static int timeToSeek;
     private static boolean chatActivated;
+    private static long createdDelay;
 
     private MainActivityDataShare() {
 
+    }
+
+    public static long getCreatedDelay() {
+        return createdDelay;
+    }
+
+    public static void setCreatedDelay(long createdDelay) {
+        MainActivityDataShare.createdDelay = createdDelay;
     }
 
     public static boolean isChatActivated() {
