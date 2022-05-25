@@ -1,6 +1,6 @@
 # WasdReplayAndroid
 
-Приложение для просмотра записей на васде с чатом на андроиде.
+Приложение для просмотра записей на васде с чатом на андроиде. Для обновления приложения, удалите его и снова загрузите. 
 
 https://github.com/Kirimatt/WasdReplayAndroid/blob/master/app/build/intermediates/apk/debug/app-debug.apk
 
@@ -43,3 +43,5 @@ https://github.com/Kirimatt/WasdReplayAndroid/blob/master/app/build/intermediate
 Лучшая благодарность в гите накидать звездочек на проект и вообще любая помощь в развитии проекта.
 
 Для улучшения проекта оставляйте issue, клонируйте проект и создавайте ветки с дальнейшими пулл реквестами.
+
+Желаю приятного пользования!
