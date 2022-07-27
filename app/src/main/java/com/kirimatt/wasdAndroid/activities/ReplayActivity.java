@@ -24,6 +24,7 @@ import com.kirimatt.wasdAndroid.dtos.chatMessages.Message;
 import com.kirimatt.wasdAndroid.dtos.settings.AllSettings;
 import com.kirimatt.wasdAndroid.utils.ImageManager;
 import com.kirimatt.wasdAndroid.utils.MainActivityDataShare;
+import com.kirimatt.wasdAndroid.utils.NameColorManager;
 import com.kirimatt.wasdAndroid.views.adapters.ListViewMessagesAdapter;
 import com.kirimatt.wasdAndroid.views.controllers.VideoLandController;
 import com.kirimatt.wasdAndroid.views.controllers.VideoPortraitController;
@@ -340,6 +341,7 @@ public class ReplayActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         MainActivityDataShare.setTimeToSeek(videoPlayer.getCurrentPosition());
+        NameColorManager.clearColors();
         super.onPause();
     }
 
