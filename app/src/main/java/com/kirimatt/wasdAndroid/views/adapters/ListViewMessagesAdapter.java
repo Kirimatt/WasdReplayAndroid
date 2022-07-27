@@ -17,10 +17,12 @@ import com.kirimatt.wasdAndroid.dtos.chatMessages.Info;
 import com.kirimatt.wasdAndroid.dtos.chatMessages.Message;
 import com.kirimatt.wasdAndroid.dtos.settings.AllSettings;
 import com.kirimatt.wasdAndroid.utils.ImageManager;
+import com.kirimatt.wasdAndroid.utils.NameColorManager;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
@@ -31,8 +33,8 @@ public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
     private final List<Message> messageList;
     private final Context context;
     private final AllSettings allSettings;
-    private float factor;
-    private int finalScale;
+    private final float factor;
+    private final int finalScale;
 
     public ListViewMessagesAdapter(Context context, int listLayout,
                                    int field, List<Message> messageList, AllSettings allSettings) {
@@ -132,12 +134,20 @@ public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
             imageViewAvatar.setImageBitmap(null);
         }
 
+        int color = allSettings.isMono() ? Color.WHITE : Optional.ofNullable(
+                NameColorManager.getUserColors(info.getUserLogin())
+        ).orElse(getRandomColor());
+
+        if (!NameColorManager.containsColor(info.getUserLogin())) {
+            NameColorManager.putUserColors(info.getUserLogin(), color);
+        }
+
         if (targetMessage.getType().equals("MESSAGE")
                 || targetMessage.getType().equals("HIGHLIGHTED_MESSAGE")) {
 
             final SpannableStringBuilder nameText = new SpannableStringBuilder(info.getUserLogin());
             final ForegroundColorSpan style = new ForegroundColorSpan(
-                    allSettings.isMono() ? Color.WHITE : getRandomColor()
+                    color
             );
 
             nameText.append(": ");
@@ -160,9 +170,9 @@ public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
             name.setText(nameText);
             imageViewSticker.setImageBitmap(null);
 
-            if (!allSettings.isMono() && targetMessage.getType().equals("HIGHLIGHTED_MESSAGE")) {
+            if (targetMessage.getType().equals("HIGHLIGHTED_MESSAGE")) {
                 nameText.setSpan(
-                        new ForegroundColorSpan(getRandomColor()),
+                        new ForegroundColorSpan(color),
                         info.getUserLogin().length(),
                         nameText.length(),
                         Spanned.SPAN_INCLUSIVE_INCLUSIVE
@@ -174,7 +184,7 @@ public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
 
         String nameText = info.getUserLogin() + ": ";
         name.setText(nameText);
-        name.setTextColor(allSettings.isMono() ? Color.WHITE : getRandomColor());
+        name.setTextColor(color);
 
         if (allSettings.isStickers()) {
             ImageManager.fetchImage(
