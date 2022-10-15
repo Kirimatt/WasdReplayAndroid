@@ -26,14 +26,12 @@ import java.util.Optional;
 import java.util.Random;
 
 public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
-    private static final Random RANDOM = new Random();
     private static final String MODERATOR_URL = "https://toptwitchstreamers.com/" +
             "wp-content/uploads/2018/09/mods.jpg";
     private final int listLayout;
     private final List<Message> messageList;
     private final Context context;
     private final AllSettings allSettings;
-    private final float factor;
     private final int finalScale;
 
     public ListViewMessagesAdapter(Context context, int listLayout,
@@ -44,7 +42,7 @@ public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
         this.messageList = messageList;
         this.allSettings = allSettings;
 
-        this.factor = context
+        float factor = context
                 .getResources()
                 .getDisplayMetrics()
                 .density;
@@ -56,15 +54,6 @@ public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
                 finalScale,
                 finalScale,
                 false
-        );
-    }
-
-    public int getRandomColor() {
-        return Color.argb(
-                255,
-                RANDOM.nextInt(255),
-                RANDOM.nextInt(255),
-                RANDOM.nextInt(255)
         );
     }
 
@@ -136,7 +125,7 @@ public class ListViewMessagesAdapter extends ArrayAdapter<Message> {
 
         int color = allSettings.isMono() ? Color.WHITE : Optional.ofNullable(
                 NameColorManager.getUserColors(info.getUserLogin())
-        ).orElse(getRandomColor());
+        ).orElse(NameColorManager.getRandomColor());
 
         if (!NameColorManager.containsColor(info.getUserLogin())) {
             NameColorManager.putUserColors(info.getUserLogin(), color);

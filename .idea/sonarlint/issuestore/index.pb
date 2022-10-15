@@ -50,3 +50,7 @@ Gapp/src/main/java/com/kirimatt/wasdAndroid/services/WasdApiService.java,a\2\a2
 Uapp/src/main/java/com/kirimatt/wasdAndroid/views/adapters/ListViewPreviewAdapter.java,e\b\eb0cc4764ee2ae3820ba46b476f6e68a4427f2e5
 €
 Papp/src/main/java/com/kirimatt/wasdAndroid/dtos/channelsInfo/ResultPreviews.java,1\4\14a9d5589208fe61d4122ad00ad64cacda425079
+ƒ
+Sapp/src/main/java/com/kirimatt/wasdAndroid/views/video/VideoViewWithCustomSeek.java,f\9\f9a4377a663da5bfcad2ee5e4392cb141810e9d3
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
