@@ -1,8 +1,6 @@
 package com.kirimatt.wasdAndroid.views.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +11,11 @@ import android.widget.TextView;
 import com.kirimatt.wasdAndroid.R;
 import com.kirimatt.wasdAndroid.dtos.search.Row;
 import com.kirimatt.wasdAndroid.utils.ImageManager;
+import com.kirimatt.wasdAndroid.utils.NameColorManager;
 
 import java.util.List;
-import java.util.Random;
 
 public class ListViewChannelsAdapter extends ArrayAdapter<Row> {
-    private static final Random RANDOM = new Random();
     private final int listLayout;
     private final List<Row> channelsList;
     private final Context context;
@@ -63,14 +60,7 @@ public class ListViewChannelsAdapter extends ArrayAdapter<Row> {
 
         if (row.getUserLogin() != null) {
             name.setText(row.getUserLogin());
-
-            int color = Color.argb(
-                    255,
-                    RANDOM.nextInt(255),
-                    RANDOM.nextInt(255),
-                    RANDOM.nextInt(255)
-            );
-            name.setTextColor(color);
+            name.setTextColor(NameColorManager.getRandomColor());
         }
 
         return convertView;
