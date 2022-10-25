@@ -1,7 +1,5 @@
 # WasdReplayAndroid
 
-#wasd.tv wasd.tv
-
 Приложение для просмотра записей на васде с чатом на андроиде. Для обновления приложения, удалите его и снова загрузите. 
 
 https://github.com/Kirimatt/WasdReplayAndroid/blob/master/app/build/intermediates/apk/debug/app-debug.apk
