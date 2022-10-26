@@ -2,9 +2,7 @@
 
 Приложение для просмотра записей на васде с чатом на андроиде. Для обновления приложения, удалите его и снова загрузите. 
 
-https://github.com/Kirimatt/WasdReplayAndroid/blob/master/app/build/intermediates/apk/debug/app-debug.apk
-
-1. Скачать апк файл
+1. Скачать [апк](https://github.com/Kirimatt/WasdReplayAndroid/blob/master/app/build/intermediates/apk/debug/app-debug.apk) файл
 
 ![image](https://user-images.githubusercontent.com/58257256/170137606-9d1261e4-bf66-4465-891a-653994839daf.png)
 
