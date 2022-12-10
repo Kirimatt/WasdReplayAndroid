@@ -53,5 +53,3 @@ z
 Japp/src/main/java/com/kirimatt/wasdAndroid/activities/PreviewActivity.java,e\a\eaad1fdf92d676c8eca798e58a7f1999ed51489d
 r
 Bapp/src/main/java/com/kirimatt/wasdAndroid/utils/ImageManager.java,5\3\53158ca557c558ee20413a7573f20e3789479114
-{
-Kapp/src/main/java/com/kirimatt/wasdAndroid/utils/MainActivityDataShare.java,0\5\05e63b1b847817dcfbf67f37f71ed686aa1402ef

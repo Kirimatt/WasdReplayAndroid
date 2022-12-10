@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,23 +19,25 @@ import android.widget.TextView;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.kirimatt.wasdAndroid.R;
-import com.kirimatt.wasdAndroid.dtos.settings.RowSettings;
+import com.kirimatt.wasdAndroid.dtos.settings.RowFieldSetting;
+import com.kirimatt.wasdAndroid.dtos.settings.RowSetting;
+import com.kirimatt.wasdAndroid.dtos.settings.RowSettingType;
+import com.kirimatt.wasdAndroid.dtos.settings.RowStatusSetting;
 
 import java.util.List;
-import java.util.Objects;
 
-public class ListViewSettingsAdapter extends ArrayAdapter<RowSettings> {
+public class ListViewSettingsAdapter extends ArrayAdapter<RowSetting> {
     private final int listLayout;
-    private final List<RowSettings> channelsList;
+    private final List<RowSetting> settingsList;
     private final Context context;
     private final SharedPreferences sharedPref;
 
     public ListViewSettingsAdapter(Context context, int listLayout,
-                                   int field, List<RowSettings> rowSettings) {
+                                   int field, List<RowSetting> rowSettings) {
         super(context, listLayout, field, rowSettings);
         this.context = context;
         this.listLayout = listLayout;
-        this.channelsList = rowSettings;
+        this.settingsList = rowSettings;
         this.sharedPref = context.getSharedPreferences("setting", MODE_PRIVATE);
     }
 
@@ -49,56 +50,65 @@ public class ListViewSettingsAdapter extends ArrayAdapter<RowSettings> {
         if (convertView == null)
             convertView = inflater.inflate(listLayout, null, false);
 
-        RowSettings row = channelsList.get(position);
-
-        TextView name = convertView.findViewById(R.id.textViewSetting);
-
-        if (Objects.isNull(row.getStatus())) {
-            EditText editTextValue = convertView.findViewById(R.id.editTextSettingValue);
-            editTextValue.setVisibility(View.VISIBLE);
-
-            float delayValue = sharedPref.getFloat(DELAY_ALIAS, 0f);
-            editTextValue.setText(delayValue == 0f ? "" : String.valueOf(delayValue));
-            editTextValue.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                    // not needed
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    // not needed
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    String target = s.toString();
-                    if (target.length() > 1 || (target.length() > 0 && !target.startsWith("-"))) {
-                        sharedPref
-                                .edit()
-                                .putFloat(DELAY_ALIAS, Float.parseFloat(s.toString()))
-                                .apply();
-                    }
-                }
-            });
+        if (settingsList.get(position).getRowSettingType() == RowSettingType.FIELD) {
+            fieldSetting((RowFieldSetting) settingsList.get(position), convertView);
         } else {
-            ImageView checkBoxImage = convertView.findViewById(R.id.checkboxSetting);
-            checkBoxImage.setVisibility(View.VISIBLE);
-
-            checkBoxImage.setImageDrawable(
-                    Boolean.TRUE.equals(row.getStatus()) ?
-                            ResourcesCompat.getDrawable(context.getResources(),
-                                    R.drawable.baseline_done_24, null) : null
-            );
+            statusSetting((RowStatusSetting) settingsList.get(position), convertView);
         }
 
-        name.setText(row.getNameSetting());
         return convertView;
     }
 
+    private void fieldSetting(RowFieldSetting row, View convertView) {
+        EditText editTextValue = convertView.findViewById(R.id.editTextSettingValue);
+        editTextValue.setVisibility(View.VISIBLE);
+
+        float delayValue = sharedPref.getFloat(DELAY_ALIAS, 0f);
+        editTextValue.setText(delayValue == 0f ? "" : String.valueOf(delayValue));
+        editTextValue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // not needed
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // not needed
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String target = s.toString();
+                if (target.length() > 1 || (target.length() > 0 && !target.startsWith("-"))) {
+                    sharedPref
+                            .edit()
+                            .putFloat(DELAY_ALIAS, Float.parseFloat(s.toString()))
+                            .apply();
+                }
+            }
+        });
+
+        TextView name = convertView.findViewById(R.id.textViewSetting);
+        name.setText(row.getNameSetting());
+    }
+
+    private void statusSetting(RowSetting<Boolean> row, View convertView) {
+        ImageView checkBoxImage = convertView.findViewById(R.id.checkboxSetting);
+        checkBoxImage.setVisibility(View.VISIBLE);
+
+        checkBoxImage.setImageDrawable(
+                Boolean.TRUE.equals(row.getValue()) ?
+                        ResourcesCompat.getDrawable(context.getResources(),
+                                R.drawable.baseline_done_24, null) : null
+        );
+
+        TextView name = convertView.findViewById(R.id.textViewSetting);
+        name.setText(row.getNameSetting());
+    }
+
     @Override
-    public RowSettings getItem(int position) {
-        return channelsList.get(position);
+    public RowSetting getItem(int position) {
+        return settingsList.get(position);
     }
 
 }
