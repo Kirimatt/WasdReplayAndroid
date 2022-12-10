@@ -26,14 +26,14 @@ import com.kirimatt.wasdAndroid.dtos.settings.RowStatusSetting;
 
 import java.util.List;
 
-public class ListViewSettingsAdapter extends ArrayAdapter<RowSetting> {
+public class ListViewSettingsAdapter extends ArrayAdapter<RowSetting<?>> {
     private final int listLayout;
-    private final List<RowSetting> settingsList;
+    private final List<RowSetting<?>> settingsList;
     private final Context context;
     private final SharedPreferences sharedPref;
 
     public ListViewSettingsAdapter(Context context, int listLayout,
-                                   int field, List<RowSetting> rowSettings) {
+                                   int field, List<RowSetting<?>> rowSettings) {
         super(context, listLayout, field, rowSettings);
         this.context = context;
         this.listLayout = listLayout;
@@ -50,16 +50,20 @@ public class ListViewSettingsAdapter extends ArrayAdapter<RowSetting> {
         if (convertView == null)
             convertView = inflater.inflate(listLayout, null, false);
 
-        if (settingsList.get(position).getRowSettingType() == RowSettingType.FIELD) {
-            fieldSetting((RowFieldSetting) settingsList.get(position), convertView);
+        TextView name = convertView.findViewById(R.id.textViewSetting);
+        RowSetting<?> rowSetting = settingsList.get(position);
+
+        if (rowSetting.getRowSettingType() == RowSettingType.FIELD) {
+            fieldSetting(convertView);
         } else {
-            statusSetting((RowStatusSetting) settingsList.get(position), convertView);
+            statusSetting((RowStatusSetting) rowSetting, convertView);
         }
 
+        name.setText(rowSetting.getNameSetting());
         return convertView;
     }
 
-    private void fieldSetting(RowFieldSetting row, View convertView) {
+    private void fieldSetting(View convertView) {
         EditText editTextValue = convertView.findViewById(R.id.editTextSettingValue);
         editTextValue.setVisibility(View.VISIBLE);
 
@@ -87,9 +91,6 @@ public class ListViewSettingsAdapter extends ArrayAdapter<RowSetting> {
                 }
             }
         });
-
-        TextView name = convertView.findViewById(R.id.textViewSetting);
-        name.setText(row.getNameSetting());
     }
 
     private void statusSetting(RowSetting<Boolean> row, View convertView) {
@@ -101,13 +102,10 @@ public class ListViewSettingsAdapter extends ArrayAdapter<RowSetting> {
                         ResourcesCompat.getDrawable(context.getResources(),
                                 R.drawable.baseline_done_24, null) : null
         );
-
-        TextView name = convertView.findViewById(R.id.textViewSetting);
-        name.setText(row.getNameSetting());
     }
 
     @Override
-    public RowSetting getItem(int position) {
+    public RowSetting<?> getItem(int position) {
         return settingsList.get(position);
     }
 

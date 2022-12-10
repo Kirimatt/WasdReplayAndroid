@@ -21,7 +21,7 @@ import java.util.Objects;
 public class SettingsActivity extends AppCompatActivity {
 
     public static final String DELAY_ALIAS = "DELAY";
-    private final List<RowSetting> settings = new ArrayList<>();
+    private final List<RowSetting<?>> settings = new ArrayList<>();
     private SharedPreferences sharedPref;
     private ListView listView;
     private ListViewSettingsAdapter adapter;
