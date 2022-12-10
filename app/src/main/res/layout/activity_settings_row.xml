@@ -24,6 +24,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/editTextSettingValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="1dp"
+        android:autofillHints="Введите каналы для поиска"
+        android:background="@color/white"
+        android:hint="@string/delayHint"
+        android:inputType="numberSigned"
+        android:labelFor="@id/searchButton"
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:typeface="sans"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <ImageView
         android:id="@+id/checkboxSetting"
         android:layout_width="wrap_content"
@@ -33,6 +55,7 @@
         android:buttonTint="#FFFFFF"
         android:textColor="#FFFFFF"
         android:src="@drawable/baseline_done_24"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

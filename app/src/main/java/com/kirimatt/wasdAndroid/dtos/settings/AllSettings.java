@@ -2,14 +2,13 @@ package com.kirimatt.wasdAndroid.dtos.settings;
 
 import android.content.SharedPreferences;
 
-import androidx.annotation.NonNull;
-
 public class AllSettings {
     private boolean date;
     private boolean mono;
     private boolean avatars;
     private boolean moderators;
     private boolean stickers;
+    private float delay;
 
     public AllSettings() {
     }
@@ -20,6 +19,7 @@ public class AllSettings {
         this.avatars = sharedPref.getBoolean("AVATAR_NEEDED", true);
         this.moderators = sharedPref.getBoolean("MODERATOR_NEEDED", true);
         this.stickers = sharedPref.getBoolean("STICKER_NEEDED", true);
+        this.delay = sharedPref.getFloat("DELAY", 0f);
     }
 
     public boolean isDate() {
@@ -62,7 +62,14 @@ public class AllSettings {
         this.stickers = stickers;
     }
 
-    @NonNull
+    public float getDelay() {
+        return delay;
+    }
+
+    public void setDelay(float delay) {
+        this.delay = delay;
+    }
+
     @Override
     public String toString() {
         return "AllSettings{" +
@@ -71,6 +78,7 @@ public class AllSettings {
                 ", avatars=" + avatars +
                 ", moderators=" + moderators +
                 ", stickers=" + stickers +
+                ", delay=" + delay +
                 '}';
     }
 }

@@ -1,23 +1,23 @@
 package com.kirimatt.wasdAndroid.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.EditText;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.kirimatt.wasdAndroid.R;
 import com.kirimatt.wasdAndroid.dtos.settings.RowSettings;
-import com.kirimatt.wasdAndroid.utils.MainActivityDataShare;
 import com.kirimatt.wasdAndroid.views.adapters.ListViewSettingsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    public static final String DELAY_ALIAS = "DELAY";
     private final List<RowSettings> settings = new ArrayList<>();
     private SharedPreferences sharedPref;
     private ListView listView;
@@ -54,6 +54,12 @@ public class SettingsActivity extends AppCompatActivity {
                 "STICKER_NEEDED",
                 sharedPref.getBoolean("STICKER_NEEDED", true))
         );
+
+        settings.add(new RowSettings(
+                "Задержка",
+                DELAY_ALIAS,
+                sharedPref.getFloat(DELAY_ALIAS, 0f))
+        );
     }
 
     @Override
@@ -79,12 +85,13 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void onClickItem(int position) {
         RowSettings rowSettings = settings.get(position);
-        rowSettings.setStatus(!rowSettings.getStatus());
 
-        settings.remove(position);
-        settings.add(position, rowSettings);
-
-        listView.setAdapter(adapter);
+        if (!Objects.isNull(rowSettings.getStatus())) {
+            rowSettings.setStatus(!rowSettings.getStatus());
+            settings.remove(position);
+            settings.add(position, rowSettings);
+            listView.setAdapter(adapter);
+        }
     }
 
     @Override
@@ -92,10 +99,11 @@ public class SettingsActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
 
         for (int i = 0; i < settings.size(); i++) {
-            editor.putBoolean(
-                    settings.get(i).getAliasSetting(),
-                    settings.get(i).getStatus()
-            );
+            if (!Objects.isNull(settings.get(i).getStatus())) {
+                editor.putBoolean(
+                        settings.get(i).getAliasSetting(),
+                        settings.get(i).getStatus());
+            }
         }
 
         editor.apply();
