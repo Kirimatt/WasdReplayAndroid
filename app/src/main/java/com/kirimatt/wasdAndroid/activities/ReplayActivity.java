@@ -175,6 +175,8 @@ public class ReplayActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("setting", MODE_PRIVATE);
         AllSettings allSettings = new AllSettings(sharedPref);
 
+        Log.d("SETTING_DELAY_MESSAGES", String.valueOf(allSettings.getDelay()));
+
         adapter = new ListViewMessagesAdapter(
                 getApplicationContext(),
                 R.layout.activity_video_row,
@@ -191,10 +193,11 @@ public class ReplayActivity extends AppCompatActivity {
             while (currentMessagePosition >= 0) {
                 try {
 
-                    if (isChatAutoScrollEnabled.get() && videoPlayer.getCurrentPosition()
+                    boolean messageInTime = videoPlayer.getCurrentPosition()
                             + TIME_OFFSET_DELAY_MILLIS + DELAY_CREATION >=
                             messages.get(currentMessagePosition).getDateTime().getTime()
-                                    - startReplayInMillis) {
+                                    - startReplayInMillis + allSettings.getDelay() * 1000;
+                    if (isChatAutoScrollEnabled.get() && messageInTime) {
                         int finalCurrentMessagePosition = currentMessagePosition;
                         runOnUiThread(() -> {
                             listToViewMessages.add(messages.get(finalCurrentMessagePosition));

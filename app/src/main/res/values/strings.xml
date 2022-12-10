@@ -12,4 +12,5 @@
     <string name="savedHistory" />
     <string name="wasd_replay_by_kirimatt">Wasd Replay by kirimatt</string>
     <string name="search_edit_text">Введите каналы для поиска</string>
+    <string name="delayHint">Введите задержку</string>
 </resources>
